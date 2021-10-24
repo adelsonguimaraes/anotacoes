@@ -60,3 +60,8 @@ utilizamos o seguinte comando
 ## Consultando nosso catalago de images
 Podemos consultar o catálogo de images que possuímos no nosso servidor utilizando o comando
 >curl [IP_SERVIDOR]:[PORTA]/v2/_catalog
+
+
+## Baixando imagem registry servidor de images
+Agora que temos uma imagem dentro nosso servidor registry, podemos fazer pull e baixar a imagem para nossa máquina, para isso utilizamos o seguinte comando.
+>docker pull [IP_SERVIDOR]:[PORTA]/[NOME_IMAGEM]:[VERSAO]
