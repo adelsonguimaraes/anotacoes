@@ -6,4 +6,4 @@ Aqui pretendo manter por escrito todo o conhecimento que eu adiquirir durante me
 Fique a vontade para consumir os conteúdos e compartilhar com amigos, ficarei muito feliz de ajudar outras pessoas com minhas anotações.
 
 # Conteúdos
-[Criando um servidor de Registro Docker]('docker/registry.MD')
+[Criando um servidor de Registro Docker]('./docker/registry.MD')
