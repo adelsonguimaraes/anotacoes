@@ -1,5 +1,5 @@
 # Anotações - SSH 📝
-Olá bem vindo as minhas anotações de Docker, fique a vontade, espero que os conteúdos sejam de grande ajuda e bons estudos.
+Olá bem vindo as minhas anotações de SSH, fique a vontade, espero que os conteúdos sejam de grande ajuda e bons estudos.
 
 # Anotações
 1. [Aventuras](./../README.MD) - Voltar para o incício.
