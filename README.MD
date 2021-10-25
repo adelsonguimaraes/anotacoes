@@ -5,6 +5,8 @@ Aqui pretendo manter por escrito todo o conhecimento que eu adiquirir durante me
 
 Fique a vontade para consumir os conteúdos e compartilhar com amigos, ficarei muito feliz de ajudar outras pessoas com minhas anotações.
 
+![](https://c.tenor.com/pOG8a3bXkG8AAAAd/party-dance.gif)
+
 # Aventuras 📚 Vamos estudar
 1. [Docker](docker/README.MD) - Anotações sobre Docker.
 2. [SSH](ssh/README.MD) - Anotações sobre SSH.
