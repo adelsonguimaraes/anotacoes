@@ -10,12 +10,19 @@ Para copiar aquivos de um servidor via SSH para nosso local podemos utilizar o s
 
 ## Copiando diretórios do servidor para local
 Para copiar diretórios de um servidor via SSH para o local podemos utilizar o seguinte comando
->scp usuario@ipservidor:caminho/* /caminho_local
+>scp -rp usuario@ipservidor:caminho /caminho_local
 
 ## Copiando arquivos entre servidores
 Para copiar arquivos ou diretórios entre 2 servidores podemos utilizar a mesma forma vista anteriormente, o que muda é o destino, veja o código abaixo
->scp usuario@ipservidor:arquivo.exetensao usuario@ipservidor2:caminho_servidor2/
+>scp usuario@ipservidor:arquivo.exetensao usuario@ipservidor2:caminho_servidor2
 
 e para diretórios
 
->scp usuario@ipservidor:caminho/* usuario@ipservidor2:caminho_servidor2/*
+>scp -rp usuario@ipservidor:caminho usuario@ipservidor2:caminho_servidor2
+
+## Copiando arquivos locais para o servidor
+Também podemos mandar arquivos locais para o servidor usando
+>scp arquivo.extensao usuario@ipservidor:caminho
+
+E também podemos enviar diretórios
+>scp -rp caminho usuario@ipservidor:caminho
