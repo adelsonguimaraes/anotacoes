@@ -123,6 +123,7 @@ services:
     # porta host 5000 : container 5000
     ports:
       - 5000:5000
+    #variáveis de ambiente
     environment:
       # arquivo de registro
       - REGISTRY_AUTH=htpasswd
@@ -136,5 +137,6 @@ services:
       - ./auth:/auth
       # registro e imagens
       - ./data:/data
-      #variáveis de ambiente
+    # sempre reiniciar
+    restart: always
 ```
