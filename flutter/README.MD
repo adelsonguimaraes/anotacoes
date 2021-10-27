@@ -2,7 +2,7 @@
 
 # Fluter
 
-O Flutter é um poderoso ``Famework`` criado pelo ``Goggle`` baseado na linguagem ``Dart``, que por sinal também é uma linguagem simples aprendizado e muito poderosa.
+O Flutter é um poderoso ``Framework`` criado pelo ``Goggle`` baseado na linguagem ``Dart``, que por sinal também é uma linguagem simples aprendizado e muito poderosa.
 
 Flutter foi criado com propósito inicial de permitir programar aplicações mobile híbridas que são convertidas no build para a linguagem nativa dos sistemas operacionais ``Android`` e ``Ios``, porém em versões mais recentes Flutter chega com a proposta de gerar aplicações ``Web`` e ``Desktop`` também, além do já conhecido build para mobile.
 
