@@ -1,6 +1,6 @@
 ![logo](https://www.zup.com.br/wp-content/uploads/2021/03/5ce2fde702ef93c1e994d987_flutter.png)
 
-# Fluter
+# Flutter
 
 O Flutter é um poderoso ``Framework`` criado pelo ``Goggle`` baseado na linguagem ``Dart``, que por sinal também é uma linguagem simples aprendizado e muito poderosa.
 
