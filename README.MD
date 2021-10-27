@@ -5,7 +5,7 @@ Aqui pretendo manter por escrito todo o conhecimento que eu adiquirir durante me
 
 Fique a vontade para consumir os conteúdos e compartilhar com amigos, ficarei muito feliz de ajudar outras pessoas com minhas anotações.
 
-![](https://c.tenor.com/pOG8a3bXkG8AAAAd/party-dance.gif)
+![studing](https://cdnb.artstation.com/p/assets/images/images/036/125/405/original/igor-freitas-mesa.gif?1616779562)
 
 # Aventuras 📚 Vamos estudar
 1. [Docker](docker/README.MD) - Anotações sobre Docker.
