@@ -10,4 +10,4 @@ A proposta do Flutter é que com apenas um código base você possa criar aplica
 
 # Anotações
 1. [Aventuras](./../README.MD) - Voltar para o incício.
-2. [Aplicação Flutter](registry.MD) - Como criar um projeto de uma aplicação Flutter.
+2. [Criando Projeto Flutter](criando_projeto_flutter.MD) - Como criar um projeto de uma aplicação Flutter.

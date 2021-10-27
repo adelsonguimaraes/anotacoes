@@ -1,5 +1,5 @@
 # Criando o Projeto de um Aplicação Flutter
-Aqui vamos pode onde começamos para criar uma aplicação Flutter, vamos entender que neste ponto você já possua o ambiente de desenvolvimento configura para Flutter.
+Aqui vamos ver pode onde começamos para criar uma aplicação Flutter, vamos entender que neste ponto você já possua o ambiente de desenvolvimento configurado para programar em Flutter.
 
 Caso ainda não pussua o ambiente Flutter, pode aprender a configurar com o seguinte link;
 >https://flutter.dev/docs/get-started/install
