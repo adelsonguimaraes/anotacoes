@@ -5,3 +5,4 @@ Olá bem vindo as minhas anotações de Docker, fique a vontade, espero que os c
 1. [Aventuras](./../README.MD) - Voltar para o incício.
 2. [Docker Registry](registry.MD) - Criando um servidor Registry Docker.
 3. [Docker Laravel](docker_laravel.MD) - Dokernerizando aplicação Laravel + Nginx + MariaDB
+4. [Nginx-Proxy + SSL](proxy_ssl.MD) - Criando um gerenciado de Proxy com Nginx + Automatização de certificado SSL
