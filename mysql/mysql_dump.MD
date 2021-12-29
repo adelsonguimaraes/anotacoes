@@ -1,5 +1,15 @@
 # Criando e Restaurando um Backup com MySQL e MySQL Dump.
-O ``MySQL Dump`` é uma ferramenta do própio ``MySQL`` que ja é instalada juntamente com o MySQL.
+O ``MySQL Dump`` é uma ferramenta do própio ``MySQL`` que ja é instalada juntamente com o MySQL, a utilização do processo é toda realizada via terminal de comando o que torna simples e rápido o processo.
+
+## Requisitos
+Para utiliza esses recursos, é necessário que no ambiente onde forem executados os comandos dessas anotações o MySQL sever tenha sido instalado e esteja rodando pode testar isso utlizando o seguinte comando.
+
+>mysql --version
+
+A saída será algo como
+>mysql  Ver 15.1 Distrib 10.4.6-MariaDB ...
+
+Com isso seu ambiente está pronto para utilizar os recursos de Dump do MySQL.
 
 ## MySQL Dump
 
