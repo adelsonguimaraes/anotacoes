@@ -1,6 +1,6 @@
 ![logo](https://e-tinet.com/wp-content/uploads/2018/10/MySQL-banco-de-dados-linux-1024x512.png)
 
-# Flutter
+# MYSQL
 
 O `MySQL` é um poderoso gerenciador de banco de dados relacional, mantido pela ``Oracle`` é o gerenciador mais popular da empresa.
 
