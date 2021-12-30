@@ -1,7 +1,7 @@
 # Configurando e salvando credenciais git
 Aqui vamos ver como configurar acesso e salvar o acesso do git.
 
-## Setando para o git config manter credênciais salvas
+## Setando para o git config manter credenciais salvas
 Inicialmente vamos setar pro arquivo de configuração do git dados da nossa credêncial, essas informações são relativas ao sevidor que vocÊ utilzia, são os dados que você utiliza para cessar.
 >git config --global credential.helper store
 
