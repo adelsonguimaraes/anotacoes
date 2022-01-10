@@ -21,7 +21,7 @@ O comando a cima vai criar uma nova branch localmente e checa-la assim que for c
 
 ## Publicando nossa branch remotamente
 Agora vamos publicar nossa branch nova na nuvem, para que outras pessoas possam encherga-la e para que possamos enviar commits para a nuvem enquanto trabalhamos.
->git origin push melhoria/adicionando_subtracao
+>git push --set-upstream origin melhoria/adicionando_subtracao
 
 Pronto nossa branch foi publicada na nuvem e agora outras pessoas que participam do projeto podem ver em que estamos trabalhando.
 
