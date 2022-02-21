@@ -1,4 +1,4 @@
-# Salvando uma Imagem Docker localmente
+# Salvando uma Imagem docker localmente
 Como salvar uma imagem de forma local para uma necessidade de uso off-line.
 
 ## Salvando a Imagem
