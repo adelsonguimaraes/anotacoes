@@ -63,7 +63,7 @@ class Filme(models.Model):
     
     ...
 
-    courses = models.ManyToManyField(
+    categorias = models.ManyToManyField(
         to='Filme',
         through='CategoriaFilme
     )
