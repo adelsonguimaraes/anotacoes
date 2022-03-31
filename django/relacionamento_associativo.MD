@@ -69,7 +69,7 @@ class Filme(models.Model):
     )
 ```
 
-Pronto agora nossa classe filme está integrada com a classe associativa, agora vamos criar a migração dessa atualização.
+Pronto agora nossa classe filme está integrada com a classe associativa, também é possível fazer isso na classe categoria, mas aqui vamos apenas deixar na classe filme, agora vamos criar a migração dessa atualização.
 
 # Criando a Migration
 Para criar a migration da nossa modificação para Classe Associativa, vamos utilizar o comando abaixo.
