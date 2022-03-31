@@ -1,6 +1,6 @@
 ![logo](https://miro.medium.com/max/1200/0*aurC6Id6dEJPYry1.png)
 
-# Flutter
+# Django
 
 O Django é um poderoso ``Framework`` para trabalhar com desenvolvimento na tecnologia python, muitas funcionalidades estão acopladas e reduzem bastante o tempo de produção, permitindo que seja investido mais tempo em regras de negócio.
 
