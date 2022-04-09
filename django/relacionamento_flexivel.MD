@@ -25,7 +25,7 @@ class MateriaSerializer(FlexFieldsModelSerializer):
 ## Inserindo os campos expansíveis
 Agora precisamos dentro dessa classe adicionar um dicionário chamado ``expandable_fields`` que vai receber as configurações para trazer os dados da tabela associada, vejamos a baixo o código exemplo.
 ```python
-class MateriaSerializer(FlexFieldsModelSerializer):
+class MateriaModelSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = models.Materia
         fields = '__all__'
@@ -33,7 +33,7 @@ class MateriaSerializer(FlexFieldsModelSerializer):
     # dict
     expandable_fields = {
         'alunos': ( # o nome da lista
-            'app.AlunoSerializer', # o serelizador da tabela associada
+            'app.AlunoModelSerializer', # o serelizador da tabela associada
             {
                 'source': 'aluno_set', # o campo set 
                 'many' : True # relacionamento muitos pra muitos
@@ -69,6 +69,43 @@ O resultado dessa consulta deve trazer algo parecido com isso
 ]
 ```
 Quando o parametro ``expand=alunos`` é removido a sessão de alunos não é retorna no resultado, apenas a lista de matérias.
+
+# Fazendo o caminho inverso
+Já conseguimos expandir todos os alunos de uma matéria, agora vamos fazer o inverso, vamos expandir todos as matérias de um aluno, muito simples, precisamos injetar nossa herança e adiconar nosso dict assim como fizemos em materia.
+
+```python
+class AlunoModelSerializer(FlexFieldsModelSerializer):
+    class Meta:
+        model = models.Aluno
+        fields = '__all__'
+
+    # dict
+    expandable_fields = {
+        'materia_group': (  # nome do grupo associativa
+            'app.MateriaModelSerializer',
+        )
+    }
+```
+
+Assim como em materia precisamos adicionar na nossa url de consulta o parametro ``expand`` com o nome que demos para nossa expanção.
+
+```sh
+http://localhost:8000/app/aluno/?expand=materia_group
+```
+E nossa resposta deve ser algo parecido com isso.
+```json
+[
+    {
+        "id": 40,
+        "nome": "Pedro",
+        "materia_group": {
+            "id": 1,
+            "nome": "Matemática"
+        }
+    }
+]
+```
+Esse é um modelo simples onde cada aluno pode estar em apenas uma matéria.
 
 # Melhorando a performance
 Quando trabalhamos no Django com consultas em tabelas associativas, na maioria das vezes ele não resolve a consulta da melhor forma, isso quer dizer que quando temos uma consulta de um pra muitos ou muitos pra muitos, ele acaba fazendo uma nova consulta para cada registro da lista, o que deixa a perfomance mais lenta.
