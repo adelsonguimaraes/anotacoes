@@ -17,7 +17,7 @@ Repare que importamos ``post_save`` esse é um dos eventos que já vem prontos n
 Agora vamos criar nosso método, mas antes vamos chamar nossa annotation do receiver e configurar com os parametros necessários.
 
 ```python
-@receiver(post_save, sender=models.State, dipatch_uid='create_file_usuario', weak=False)
+@receiver(post_save, sender=models.Usuario, dipatch_uid='create_file_usuario', weak=False)
 ```
 Nosso annotation recebe três parâmetros, o primeiro é o evento, o segundo é o modelo, o teceiro é um uid único, nese caso vamos dar o mesmo nome do metodo já que é único e o nosso quarto parâmetro é referente a uma configuração esse weak por padrão é True, mas na documentação explica que ele pode matar um receiver antes de ser executado, por isso vamos passar como False para evitar que isso aconteça
 
@@ -45,3 +45,22 @@ Se tudo deu certo no nosso processo de adicionar a receive o arquivo usuarios.tx
 ```txt
 1|Pedro
 ```
+
+# Evento antes de salvar
+Agora que já conseguimos dispar nosso evento depois de salvar os dados, vamos ver como pegamos o evento antes de salvar, esse evento é interessante para quando queremos fazer uma validação ou alterar o valor de um campo antes de ser salvo.
+
+Primeiro precisamos adicionar na nossa importação o ``pre_save``, evento responsável pelo gatilho antes do salvamento.
+
+```python
+from django.db.models.signals import post_save, pre_save
+```
+
+Agora como antes, vamos criar nossa annotation e nosso evento.
+
+```python
+@receiver(pre_save, sender=models.Usuario, dipatch_uid='set_hash_user', weak=False)
+def set_hash_user(instance, **kwargs):
+    instance.hash = "#123"
+```
+
+Feito, agora quando acontecer algum evento de save, antes de salvar vamos pegar a instância do usário e adicionar ao campo hash o valor "#123", esse é um exemplo simples, as poderiamos estar verificando um campo mutavel de outra tabela, ou último registro e afim, isso pode atender vários cenários.
