@@ -17,9 +17,9 @@ Repare que importamos ``post_save`` esse é um dos eventos que já vem prontos n
 Agora vamos criar nosso método, mas antes vamos chamar nossa annotation do receiver e configurar com os parametros necessários.
 
 ```python
-@receiver(post_save, sender=models.State, dipatch_uid='create_file_usuario')
+@receiver(post_save, sender=models.State, dipatch_uid='create_file_usuario', weak=False)
 ```
-Nosso annotation recebe três parâmetros, o primeiro é o evento, o segundo é o modelo e o teceiro é um uid único, nese caso vamos dar o mesmo nome do metodo já que é único
+Nosso annotation recebe três parâmetros, o primeiro é o evento, o segundo é o modelo, o teceiro é um uid único, nese caso vamos dar o mesmo nome do metodo já que é único e o nosso quarto parâmetro é referente a uma configuração esse weak por padrão é True, mas na documentação explica que ele pode matar um receiver antes de ser executado, por isso vamos passar como False para evitar que isso aconteça
 
 Agora na linha de baixo da annotation vamos adicionar nosso método que irá criar um arquivo onde salvará o id e o nome do usuário assim que um dado for salvo.
 
