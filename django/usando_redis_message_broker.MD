@@ -169,8 +169,8 @@ class AlunoActions:
         results = map(lambda item: f"{results['nome']}, {results['idade']}", results)
         # abrimos o arquivo
         with open('alunos_por_idade.txt', 'a') as file:
-            # escrevmos as linhas no arquivo
-            file.writelines(results)
+            # escrevmos as linhas no arquivo de forma inteiravel(list)
+            file.writelines(list(results))
             # adicionando um time sleep apenas para simular uma demora no processo
             time.sleep(5)
 ```
