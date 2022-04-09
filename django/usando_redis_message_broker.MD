@@ -11,16 +11,12 @@ Com a união dessas duas poderosas tecnologias vamos montar um recurso com webso
 # Instalando as ferramentas
 Para começar vamos instalar as ferramentas necessárias no nosso projeto.
 
-1. Celery
-   
-    ```sh
-    pip install celery redis
-    ```
-2. GEvent
+```sh
+pip install celery redis gevent
+```
 
-    ```sh
-    pip install gevent
-    ```
+Instalamos aqui o celery que já explicamos a cima, o pacote redis do python pra poder comunicamos com o redis e o geevent que é um gerenciador de pool de eventos e memória, sua função é melhorara performance.
+
 # Container Docker com Redis
 Para simplificar nossa vida vamos usar o Docker para subir um banco de dados Redis na nossa máquina, segue abaixo o docker-compose para isso.
 
@@ -41,3 +37,39 @@ Instalando docker
 
 Instalando docker-compose
 > https://docs.docker.com/compose/install/
+
+# Criando o arquivo celery
+Agora que já instalamos os pacotes e temos nosso container docker com redis funcionando, vamos criar dentro do nosso aplicativo principal do projeto um arquivo chamado ``celery.py``.
+
+No topo desse arquivo vamos fazer as importações que serão necessárias para nosso processo.
+
+```python
+from __future__ absolute_import, unicode_literals
+import os
+from celery import Celery
+from kombu import Exchange, Queue
+```
+
+Agora vamos adicionar as configurações para que as ``workers`` do Celery consigam acessar e usar os recursos do Django, isso possibilita que uma ``worker`` faça por exemplo acesso a uma base dados via Django.
+
+```python
+# setando a variavel de ambiente, settings do app
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
+
+# instanciando o app do Celery
+app = Celery('app')
+
+# carregando as configurações do Django para nosso app Celery
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# configurando as filas
+app.conf.task_queues = (
+    Queue('default', Exchange('default'), routing_key='default')
+)
+
+# configurando o Celery para descobrir automaticamente as tarefas
+app.autodiscover_tasks()
+
+# configurando o timezone
+app.conf.timezone = 'America/Manaus'
+```
