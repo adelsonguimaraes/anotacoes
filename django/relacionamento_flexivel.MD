@@ -71,7 +71,7 @@ O resultado dessa consulta deve trazer algo parecido com isso
 Quando o parametro ``expand=alunos`` é removido a sessão de alunos não é retorna no resultado, apenas a lista de matérias.
 
 # Fazendo o caminho inverso
-Já conseguimos expandir todos os alunos de uma matéria, agora vamos fazer o inverso, vamos expandir todos as matérias de um aluno, muito simples, precisamos injetar nossa herança e adiconar nosso dict assim como fizemos em materia.
+Já conseguimos expandir todos os alunos de uma matéria, agora vamos fazer o inverso, vamos expandir a matéria de um aluno, muito simples, precisamos injetar nossa herança e adiconar nosso dict assim como fizemos em materia.
 
 ```python
 class AlunoModelSerializer(FlexFieldsModelSerializer):
