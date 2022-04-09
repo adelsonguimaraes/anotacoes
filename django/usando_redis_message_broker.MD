@@ -165,12 +165,13 @@ class AlunoActions:
     def alunos_por_idade():
         # consultamos a lista de alunos
         results = models.Aluno.objects.all()
-        # formatamos em string cada registro separado por vírgula
-        results = map(lambda item: f"{results['nome']}, {results['idade']}", results)
+        # formatamos em string cada registro separado por vírgula saltando uma linha
+        results = map(lambda item: f"{results['nome']}, {results['idade']}\n", results)
         # abrimos o arquivo
         with open('alunos_por_idade.txt', 'a') as file:
-            # escrevmos as linhas no arquivo de forma inteiravel(list)
-            file.writelines(list(results))
+            # escrevmos as linhas no arquivo
+            for line in results:
+                file.writelines(line)
             # adicionando um time sleep apenas para simular uma demora no processo
             time.sleep(5)
 ```
