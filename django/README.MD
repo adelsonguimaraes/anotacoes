@@ -8,3 +8,4 @@ O Django é um poderoso ``Framework`` para trabalhar com desenvolvimento na tecn
 1. [Aventuras](./../README.MD) - Voltar para o incício.
 2. [Criando Relacionamento Associativo](relacionamento_associativo.MD) - Como criar realacionamento associativo com o Django.
 3. [Relecionamento Flexível](relacionamento_flexivel.MD) - Como fazer relacionamento flexível para classes assossiativas do Django com FlexFields.
+4. [Trabalhando com Receiver](trabalhando_com_receiver.MD) - Como utilizar Triggers (Receiver) no Django.
