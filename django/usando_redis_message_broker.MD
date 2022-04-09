@@ -219,6 +219,6 @@ http://localhost:8000/app/aluno/alunos_por_idade/
 Se tudo deu certo aconteceu o que comentamos acima, sua resposta foi 200 e nosso worker está executando nossa task em segundo plano, para termos certeza disso precisamos verificar na raiz do projeto se o arquivo alunos.txt foi criado e se aos poucos ele está recebendo conteúdo, ficará algo como
 
 ```txt
-1|Pedro
-2|João
+Pedro, 14
+João, 12
 ```
