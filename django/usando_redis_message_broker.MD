@@ -137,3 +137,87 @@ Se tudo ocorreu corretamente nosso seu terminal devem aparecer informações par
 ```
 
 Se você viu algo parecido com isso no seu terminal, seu Worker do Celery está funcionando e pronto parece receber mensagens.
+
+# Criando uma tarefa
+Agora tudo estudo está funcionando perfeitamente, vamos criar nossa ``task``, para isso dentro da sua aplicação no mesmo local onde criou o arquivo ``celery.py``, vamos criar um arquivo chamado ``tasks.py``.
+
+Vamos incialmente chamar no topo do arquivo o import que vamos precisar utrilizar.
+
+```python
+from celery import shared_task
+import time
+```
+
+E agora vamos implementar nosso método que referencia nossa função assíncrona
+
+```python
+# annotation da task passando o nome da nossa lista
+@shared_task(queue='default')
+def alunos_por_idade():
+    pass
+```
+
+Agora dentro do arquivo ``actions.py`` vamos fazer nossa função lógica que vai usar nosso método da task do celery.
+
+```python
+class AlunoActions:
+    @staticmethod
+    def alunos_por_idade():
+        # consultamos a lista de alunos
+        results = models.Aluno.objects.all()
+        # formatamos em string cada registro separado por vírgula
+        results = map(lambda item: f"{results['nome']}, {results['idade']}", results)
+        # abrimos o arquivo
+        with open('alunos_por_idade.txt', 'a') as file:
+            # escrevmos as linhas no arquivo
+            file.writelines(results)
+            # adicionando um time sleep apenas para simular uma demora no processo
+            time.sleep(5)
+```
+
+Agora lá nosso método da task celery chamamos essa função da action substitundo o pass.
+
+```python
+# annotation da task passando o nome da nossa lista
+@shared_task(queue='default')
+def alunos_por_idade():
+    actions.AlunoActions.alunos_por_idade()
+```
+
+Agora precisamos apenas chamar nosso método de task dentro do nosso viewset no endpoint que irá executar essa atividade.
+
+```python
+# adicionando a importação de tasks no topo
+from app import tasks
+
+
+class AlunoModelViewSet(viewsets):
+    queryet = models.Aluno.objects.all()
+    serializer_class = serializers.AlunoSerializer()
+    
+    # criando um metodo para ser nosso endpoint
+    @action(methods=['GET'], detail=False)
+    def alunos_por_idade(self, request, *args, **kwargs):
+        # chamando o método da task, aplicando como assincrono,
+        # como não temos parametros passamos um array vazio []
+        tasks.alunos_por_idade.aplly_async([])
+        return Response(status=200)
+```
+
+Show, agora vamos novamente startar nossa worker para poder fazer o nosso teste, então rode o comando no temrinal.
+
+```sh
+celery -A app worker --loglevel=DEBUG --pool=gevent -Q default
+```
+
+Agora vamos acessa na url nosso endpoint para disparar nosso worker, o comportamento esperado é que ele retorne imediatamente o resultado como ``status = 200`` assim como configuramos ali e em background ele fique executando nossa task na worker, acesse a url
+
+```sh
+http://localhost:8000/app/aluno/alunos_por_idade/
+```
+Se tudo deu certo aconteceu o que comentamos acima, sua resposta foi 200 e nosso worker está executando nossa task em segundo plano, para termos certeza disso precisamos verificar na raiz do projeto se o arquivo alunos.txt foi criado e se aos poucos ele está recebendo conteúdo, ficará algo como
+
+```txt
+1|Pedro
+2|João
+```
