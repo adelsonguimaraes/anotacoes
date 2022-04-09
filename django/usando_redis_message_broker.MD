@@ -64,7 +64,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # configurando as filas
 app.conf.task_queues = (
-    Queue('default', Exchange('default'), routing_key='default')
+    Queue('default', Exchange('default'), routing_key='default'),
 )
 
 # configurando o Celery para descobrir automaticamente as tarefas
@@ -73,3 +73,67 @@ app.autodiscover_tasks()
 # configurando o timezone
 app.conf.timezone = 'America/Manaus'
 ```
+
+# Adiciando o Celery para ser iniciado
+Agora precisamos dentro do arquivo ``__init__.py`` configurar nosso Celary para ser iniciado, para isso basta adicionar o código abaixo.
+
+```python
+from __future__ import absolute_import, unicode_literals
+from .celery import app as celery_app
+
+__all__ = ('celery_app',)
+```
+
+# Configurando as variáveis do Celery no settings
+Vamos configurar as variáveis de ambiente do Celery dentro do nosso ``settings.py``.
+
+```python
+# url do broker, no final o barra zero é o caminho para o banco de dados
+# padrão do redis que guarda a mensageria recebida
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# configurando para aceitar conteúdos no formato JSOn
+CELERY_ACCEPT_CONTENT = ['application/json']
+# habilitando UTC
+CELERY_ENABLE_UTC = True
+# setando a timezone
+CELERY_TIMEZONE = 'America/Manaus'
+# configurando serializer da task
+CELERY_TASK_SERIALIZER = 'json'
+# configurando serializer do result
+CELERY_RESULT_SERIALIZER = 'json'
+```
+
+# Levantando um Worker do Celery
+Bom agora que todo nosso ambiente já está configurado para trabalhar com o Celery, vamos subir nosso worker, para isso vamos rodar a linha de código abaixo no terminal.
+
+```sh
+celery -A app worker --loglevel=DEBUG --pool=gevent -Q default
+```
+Vamos analizar nosso comando
+1. celery - Chamando o celery
+2. -A app - O nome do nosso aplicativo onde está o celery.py
+3. worker - Invocando um worker
+4. --loglevel - Ativando o log para nível de DEBUG
+5. --pool=gevent - Informando que nosso pool de thread será gerido pelo gevent
+6. -Q default - O nome da nossa Queue(lista) que configuramos em celery.py
+
+Se tudo ocorreu corretamente nosso seu terminal devem aparecer informações parecidas com essas.
+
+```sh
+ -------------- celery@user v5.2.6 (dawn-chorus)
+--- ***** ----- 
+-- ******* ---- Linux-5.4.0-104-generic-x86_64-with-glibc2.31 2022-04-09 14:42:08
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         sale:0x7ffa9ab91120
+- ** ---------- .> transport:   redis://127.0.0.1:6379/0
+- ** ---------- .> results:     disabled://
+- *** --- * --- .> concurrency: 8 (gevent)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> default          exchange=default(direct) key=default
+
+```
+
+Se você viu algo parecido com isso no seu terminal, seu Worker do Celery está funcionando e pronto parece receber mensagens.
