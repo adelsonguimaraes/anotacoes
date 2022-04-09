@@ -81,7 +81,7 @@ class AlunoModelSerializer(FlexFieldsModelSerializer):
 
     # dict
     expandable_fields = {
-        'materia_group': (  # nome do grupo associativa
+        'materia': (  # nome do grupo associativa
             'app.MateriaModelSerializer',
         )
     }
@@ -90,7 +90,7 @@ class AlunoModelSerializer(FlexFieldsModelSerializer):
 Assim como em materia precisamos adicionar na nossa url de consulta o parametro ``expand`` com o nome que demos para nossa expanção.
 
 ```sh
-http://localhost:8000/app/aluno/?expand=materia_group
+http://localhost:8000/app/aluno/?expand=materia
 ```
 E nossa resposta deve ser algo parecido com isso.
 ```json
@@ -105,7 +105,6 @@ E nossa resposta deve ser algo parecido com isso.
     }
 ]
 ```
-Esse é um modelo simples onde cada aluno pode estar em apenas uma matéria.
 
 # Melhorando a performance
 Quando trabalhamos no Django com consultas em tabelas associativas, na maioria das vezes ele não resolve a consulta da melhor forma, isso quer dizer que quando temos uma consulta de um pra muitos ou muitos pra muitos, ele acaba fazendo uma nova consulta para cada registro da lista, o que deixa a perfomance mais lenta.
