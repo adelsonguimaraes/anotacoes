@@ -190,6 +190,8 @@ Agora precisamos apenas chamar nosso método de task dentro do nosso viewset no 
 ```python
 # adicionando a importação de tasks no topo
 from app import tasks
+# para gerar execption
+from kombu.exceptions import OperationalError
 
 
 class AlunoModelViewSet(viewsets):
@@ -199,9 +201,12 @@ class AlunoModelViewSet(viewsets):
     # criando um metodo para ser nosso endpoint
     @action(methods=['GET'], detail=False)
     def alunos_por_idade(self, request, *args, **kwargs):
-        # chamando o método da task, aplicando como assincrono,
-        # como não temos parametros passamos um array vazio []
-        tasks.alunos_por_idade.aplly_async([])
+        try:
+            # chamando o método da task, aplicando como assincrono,
+            # como não temos parametros passamos um array vazio []
+            tasks.alunos_por_idade.aplly_async([])
+        except OperationalError as error:
+            raise Exception(f'Broker connection error {error}')
         return Response(status=200)
 ```
 
@@ -221,4 +226,162 @@ Se tudo deu certo aconteceu o que comentamos acima, sua resposta foi 200 e nosso
 ```txt
 Pedro, 14
 João, 12
+```
+
+# Websocket
+Agora que já temos todo o ambiente com Celery e Redis configurado, vamos para a segunda parte da nosso estudo que envolve a utilização de websockets, para isso vamos começar instalando dois pacotes que serão necessários.
+
+```sh
+pip install channels channels-redis djangp-cors-headers
+```
+Agora dentro de ``settings.py`` precisamos adicionar nosso channels como um ``INTALED_APPS``.
+
+```python
+INSTALLED_APPS = [
+    ...
+    'channels',
+]
+```
+Também precisamos adicionar nosso cors-headers, porém como uma MIDDLEWARE.
+
+```python
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+]
+```
+
+Vamos setar nosso aceite para cors
+
+```python
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = default_methods
+```
+
+Também vamos adicionar dentro de ``settings.py`` a seguinte configuração.
+
+```python
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379,)]
+        }
+    }
+}
+```
+
+Ainda no mesmo arquivo vamos adicionar a configuração para nosso ASGI que vamos criar mais abaixo.
+
+```python
+ASGI_APPLICATION = 'app.asgi.application'
+```
+
+Com as configurações do channels feitas e pronto para o uso, agora vamos precisa dentro da nossa aplicação no mesmo local onde criamos o ``tasks.py`` criar um arquivo chamado ``consumers.py``, esse arquivo vai ser onde ficaram nossos channels ws.
+
+```python
+# imports que iremos precisar
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
+
+# nossa classe chat
+class ChatConsumer(AsyncJsonWebsocketConsumer):
+
+    # nossa função de conexão assincrona
+    async def connect(self):
+        # aceitando uma conexao
+        await self.accept()
+        # adicionando conexão ao grupo chat
+        await self.channel_layer.group_add('chat', self.channel_name)
+
+    # função para quando haver desconexão
+    async def disconnect(self, code):
+        # removendo a conexão do grupo chat
+        await self.channel_layer.groud_discard('chat', self.channel_name)
+
+    
+    # nosso metodo para envio de mensagens
+    async def group_message(self, event):
+        # chamamos o metodo send_json para enviar o que vier no context
+        await self.send_json(content=event['content'])
+
+    # nosso metodo para receber mensagens
+    async def receive_json(self, event, **kwargs):
+        # quando receber uma mensagem vai enviar para todos os outros conectados
+        await self.channel_layer.group_send('chat', {
+            'type': 'group.message',
+            'content': event
+        })
+```
+
+Próximo passo é criar nossas rotas de websocket, nosso arquivo deve ficar dentro do aplicativo principal, lá no mesmo lugar onde fica nosso settings, vamos chamos de ``routing.py``
+
+```python
+# imports
+from django.urls import path
+from basic import consumers
+
+# nossas rotas
+urlrouter = [
+    path('chat/', consumers.ChatConsumer.as_asgi())
+]
+```
+Agora precisamos configurar dentro do nosso arquivo ``asgi.py`` para além das rotas http também aceitar as rotas ws.
+
+Altere a linha
+
+```python
+application = get_asgi_application()
+```
+
+para
+
+```python
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": URLRouter(routing.urlrouter)
+})
+```
+
+Pronto, se tudo deu certo quando mandarmos iniciar o servidor uma nova mensagem irá nos avisar que o nosso ASGI está ativa e pronto para conexões ws.
+
+```sh
+April 10, 2022 - 03:00:39
+Django version 4.0.3, using settings 'app.settings'
+Starting ASGI/Channels version 3.0.4 development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+```
+
+Peceba na linha
+> Starting ASGI/Channels...
+
+Se você viu essa mensagem tudo está configurado corretamente.
+
+# Testando WebSocket
+Agora temos toda a configuração do websocket implementada, vamos fazer um teste pra ver se realmente tudo está funcionando.
+Para ficar mais dinâmico vamos utilizar o chrome que temos certeza que conseguirá conectar com nosso canal.
+
+No console do chrome cole o seguinte código, faça isso em duas abas para simular duas pessoas conectadas no servidor ws.
+
+```ts
+ws = new WebSocket('ws://127.0.0.1:8000/chat/')
+ws.onmessage = (data) => {
+    console.log('mensagem:')
+    console.log(data['data'])
+}
+```
+
+Agora para mandar uma mensagem para o servidor e ele devolver para as conexões vamos usar a função ``send``
+
+```ts
+// convertendo para JSON que é o formato que nosso servidor espera
+msg = JSON.stringify({message: 'Teste de mensagem'})
+// enviando
+ws.send(msg)
+```
+
+Se tudo deu certo deve ter sido impresso no seu console a mensagem.
+
+```ts
+mensagem:
+{"message": "Teste de mensagem"}
 ```
