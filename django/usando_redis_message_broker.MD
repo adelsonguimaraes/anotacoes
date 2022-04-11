@@ -385,3 +385,14 @@ Se tudo deu certo deve ter sido impresso no seu console a mensagem.
 mensagem:
 {"message": "Teste de mensagem"}
 ```
+
+# Avançando um pouco mais
+Agora vamos avançar um pouco mais, nosso próximo estudo é unir o que fizemos com o Celery e o que fizemos com Websocket, para começarmos a fazer isso precisamos criar um arquivo chamado ``helpers.py`` dentro do nosso aplicativo, mesmo local onde criamos nossos arquivos ``tasks.py`` e ``consumers.py``, e dentro do nosso arquivos vamos criar um método para enviar nossas menssagens que são providas da aplicação, ou seja, de dentro da aplicação pra fora.
+
+```python
+# imports
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+
+#
+```
