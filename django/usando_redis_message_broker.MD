@@ -394,5 +394,76 @@ Agora vamos avançar um pouco mais, nosso próximo estudo é unir o que fizemos 
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
-#
+# nosso método passando o grupo e a mensagem
+def send_channel_message(group: str, content: dict):
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(group, {
+        'type': 'group.message',
+        'content': content
+    })
 ```
+
+Perfeito, agora já temos nosso helper pronto para enviar as mensagens do sistema para quem estiver na conexão websocket, o que vamos fazer agora é atualizar nosso método ``alunos_por_idade`` lá no nosso arquivo ``actions.py`` para que ele chame nosso método criado a cima e dispare mensagens para o ws, nosso arquivo atualziado ficará assim.
+
+```python
+class AlunoActions:
+    @staticmethod
+    def alunos_por_idade():
+        # consultamos a lista de alunos
+        results = models.Aluno.objects.all()
+        # vamos pegar o total
+        counter = results.count()
+        # formatamos em string cada registro separado por vírgula saltando uma linha
+        results = map(lambda item: f"{results['nome']}, {results['idade']}\n", results)
+        # abrimos o arquivo
+        with open('alunos_por_idade.txt', 'a') as file:
+            # aqui atualizando um enumerate para capturar a linha e o index
+            for index, row in enumerate(results):
+                # atualize aqui agora pra row
+                file.write(row)
+                # vamos adicionar um calculo de porcentagem
+                percentage = (index / counter) * 100
+                # vamos chamar nosso helper criado acima para enviar as mensagens
+                helpers.send_channel_message('chat', {'message': round(percentage, 2)})
+            # vamos atualizar para 0.5 segundos
+            time.sleep(0.5)
+```
+
+Pronto nosso action está pronto para passar a porcentagem do processo de escrita para nosso canal ws, para que tudo funcione corretamente precisamos subir o celery
+
+```sh
+celery -A app worker --loglevel=DEBUG --pool=gevent -Q default
+```
+
+Colocar nosso projeto para rodar e pelo console do chrome se conectar no canal ws usando
+
+```ts
+ws = new WebSocket('ws://127.0.0.1:8000/chat/')
+ws.onmessage = (data) => {
+    console.log('mensagem:')
+    console.log(data['data'])
+}
+```
+
+E por fim vamos acessar nosso endpoint pela url para ver as mensagens sendo disparadas no canl do console.
+
+```sh
+http://localhost:8000/app/aluno/alunos_por_idade/
+```
+
+Se tudo deu certo até aqui você irá ver uma saída parecida com essa nos seu console
+
+```ts
+mensagem:
+{"message": 0.0}
+
+mensagem:
+{"message": 0.16}
+
+mensagem:
+{"message": 0.33}
+
+..
+```
+
+Se você está vendo uma saindo com a porcentagem aumentado no console tudo show até aqui nossa comunicação com tudo já feito até agora está perfeita.
