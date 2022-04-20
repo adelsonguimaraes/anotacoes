@@ -9,7 +9,7 @@ flutter pub install get
 ```
 
 # Instalando o CLI do Get
-Para automatizar nosso processo precisamos instalat o CLI do GetX, para isso estou deixando o link aqui de um video que ensina como configurar o CLI e também o link do git onde possui essa documentação.
+Para automatizar nosso processo precisamos instalar o CLI do GetX, para isso estou deixando o link aqui de um video que ensina como configurar o CLI e também o link do git onde possui essa documentação.
 
 video: https://www.youtube.com/watch?v=kvhnet3ekGA
 Doc: https://github.com/jonataslaw/get_cli
@@ -35,7 +35,7 @@ Certo vamos chamar esse nosso json de ``user.json`` e vamos coloca-lo dentro de 
 Em seguida o que pracisamos fazer e rodar nosso comando que irá usar nosso arquivo json como refência para criar nosso modelo,
 
 ```sh
-get create model on user with assets/models/user.json
+get create model on user with assets/json/user.json
 ```
 
 também podemos fazer isso a partir de uma url que contenha como resposta um json, ficaria assim.
