@@ -11,5 +11,5 @@ A proposta do Flutter é que com apenas um código base você possa criar aplica
 # Anotações
 1. [Aventuras](./../README.MD) - Voltar para o incício.
 2. [Criando Projeto Flutter](criando_projeto_flutter.MD) - Como criar um projeto de uma aplicação Flutter.
-3. [GetX: Gerando modelo a partir de JSON](getx_modelo_via_json) - GetX: Como gerar uma modelo a partir de uma arquivo JSON.
+3. [GetX: Gerando modelo a partir de JSON](getx_modelo_via_json.MD) - GetX: Como gerar uma modelo a partir de uma arquivo JSON.
 4. [Flutter: Gerando Json Serilizer de Modelo](json_serializer) - Como gerar Json Serializer para os modelos.
