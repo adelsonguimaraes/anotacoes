@@ -74,7 +74,7 @@ isort .
 ```
 
 ## Conhecendo o Black
-![logo_black](https://warehouse-camo.ingress.cmh1.psfhosted.org/d3a1a77162e3cd8c3d2089f27899b6eee71af013/68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f7073662f626c61636b2f6d61696e2f646f63732f5f7374617469632f6c6f676f322d726561646d652e706e67)
+![logo_black](https://www.freecodecamp.org/news/content/images/2020/05/1_bxzXidSUpkEaj7j0rC5ygg.png)
 
 Agora vamos conhecer nossa segunda ferramenta que irá fazer parte do nosso processo de validação de lint.
 
