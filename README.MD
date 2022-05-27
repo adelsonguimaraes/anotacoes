@@ -14,4 +14,4 @@ Fique a vontade para consumir os conteúdos e compartilhar com amigos, ficarei m
 4. [Mysql](mysql/README.MD) - Anotações sobre Mysql.
 5. [Git](git/README.MD) - Anotações sobre Git.
 6. [Django](django/README.MD) - Anotações sobre Django.
-7. [Python](python/README.MD) - Anotações sobre Python.
+7. [Python](python/readme.MD) - Anotações sobre Python.
