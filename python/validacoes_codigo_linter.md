@@ -117,3 +117,56 @@ black .
 ```
 
 Com isso o Black irá modificar tudo automáticamente e deixar da maneira que o padrão dele deixa implicito, após isso podemos rodar novamente o comando anterior de `--check` e veremos que não encontrá mais nenhum problema.
+
+## Conhecendo MyPy
+![logo_mypy](https://miro.medium.com/max/2696/1*2icBzVd8jj0ay6MNzuHPug.png)
+
+Agora vamos conhecer nossa terceira ferramenta o MyPy, essa ferramenta tem uma especificidade que é fazer a validação de `Type Hint`, ou seja, nossa ferramenta é utilizada para testar variáveis e funções tipadas, verificando se as variáveis estão recebendo realmente o valor esperado e se as funções estão tendo as saídas corretas.
+
+Em grande parte por ser uma linguagem dinâmica, a maioria das pessoas não costuma criar a amarração de tipar as variáveis, o que é natural, porém, é entendido atualmente que mesmo em linguagens dinâmicas o type hint traz benefícios como por exemplo a segurança de tipos, obrigando que o tipo esperado seja atendido, assim também como ajuda a IDE ser mais assertiva em suas sugestões já que ela passa a entender quais funções servem para aquele tipo de variável que está sendo inteirada.
+
+Porém, mesmo que o type hint seja aplicado corretamente no seu código, apenas isso não será o suficiente, pois o python ou a IDE nativamente não irá obrigar você a utilizar a tipagem, é ai que o MyPy entra em ação, ele fará o papel de validar e refutar seus códigos.
+
+Antes de prosseguirmos vamos instalar o MyPy:
+```sh
+pip install mypy
+```
+
+Para verificar se foi instalado corretamente rode:
+```sh
+mypy --version
+```
+
+A saída deve ser algo como:
+```sh
+mypy 0.960 (compiled: yes)
+```
+
+Um ponto de atenção aqui é que talvez com algumas bibliotecas ele reclame da falta de stubs, isso aconteceu com o pacote de requests por exemplo, e para resovler esse problema geralmente ele informa no terminal que deve ser rodado um comando, mas pra evitarmos esse problema desde agora vamos instalar esses stubs agora:
+```sh
+python3 -m pip install types-requests
+```
+
+Seguindo a mesma linha das ferramentas anteriores o MyPy recebe parâmetros e todos eles podem ser visualizados executando o comando "mypy -h", porém nesse vamos criar um arquivo de configuração onde poderemos definir tudo que a ferramenta vai poder fazer.
+
+Na Raiz do projeto crie um arquivo chamado ``mypy.ini``, e dentro dele vamos colocar apenas duas configurações, caso tenha interesse em saber mais, no site oficial pode ser visto isso nas documentações.
+
+```ini
+[mypy]
+python_version = 3.10
+ignore_missing_imports = true
+```
+Basicamente na 1a linha estamos declarando a sessão global, na 2a linha estamos setando a versão do python que está sendo utilziado e por fim na 3a linha estamos ignorando alguns imports de ferramentas como frameworks que não devem ser verificados.
+
+Agora vamos rodar pela primera vez nossa ferramenta:
+```sh
+mypy .
+```
+
+Segue aqui exemplo de saída da execução do MyPy quando ele encontrar erros de tipagem no código:
+```sh
+testes.py:7: error: Incompatible return value type (got "str", expected "int")
+actions.py:8: error: Module has no attribute "parse"
+
+Found 2 errors in 2 files (checked 19 source files)
+```
