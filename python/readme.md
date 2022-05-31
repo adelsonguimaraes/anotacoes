@@ -11,3 +11,4 @@ Essa grande facilidade de aplicar com muito velocidade as soluções em Python l
 # Anotações
 1. [Aventuras](./../README.MD) - Voltar para o incício.
 2. [Validações de Código Linter](validacoes_codigo_linter.md) - Validações de código linter.
+3. [Removendo PIP List](remover_pip_list.md) - Removendo pacotes instalados em piip.
