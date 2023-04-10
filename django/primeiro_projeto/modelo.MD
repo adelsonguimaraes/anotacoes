@@ -28,6 +28,8 @@ class Employee(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=False)
     salary = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    created_at = models.DateTimeField(null=False, auto_now_add=True)
+    modified_at = models.DateTimeField(null=False, auto_now=True)
 ...
 ```
 
@@ -51,13 +53,27 @@ models.DecimalField(max_digits=10, decimal_places=2, null=False)
 ```
 Aqui estamos configurando que o campo será do tipo `Decimal` com `10` dígitos e que não permite valor `nulo`.
 
+Nosso quarto atributo é chamado de `created_at` e serve para guardar a data do momento em que o dado foi criado.
+
+```py
+models.DateTimeField(null=False, auto_now_add=True)
+```
+Acima vemos que o campo não pode ser nulo e também vemos a configuração `auto_now_add=True` que significa que o Django automáticamente irá inserir a data atual no momento que o registro for inserido no banco.
+
+Nosso quinto atributo se chama `modified_at` e é referente a data da última atualização do registro no banco de dados.
+
+```py
+models.DateTimeField(null=False, auto_now=True)
+```
+Aqui podemos ver uma configuração muito parecida com o campo anterior, a diferença aqui é que a configuração de auto irá adicionar sempre que houver uma alteração nos dados, e no caso anterior a data é inserida apenas no momento da criação do registro.
+
 ## 1.3 Classe interna Meta
 
 Agora vamos ver a classe Meta que é utilizada para fazer configurações que o django precisa para gerenciar o modelo.
 
 ```py
 ...
-    salary = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    modified_at = models.DateTimeField(null=False, auto_now=True)
 
     class Meta
         db_table = 'employee'
@@ -116,7 +132,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=100, null=False)
     salary = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     gender = models.CharField(max_length=1, null=False)
-
+    
     class Meta:
         db_table = 'employee'
         managed = True
