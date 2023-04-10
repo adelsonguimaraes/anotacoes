@@ -60,3 +60,14 @@ Agora que já configuramos todos os nossos pré-requisitos necessários, podemos
 django-admin startproject sale 
 ```
 
+## 3. Abrindo o projeto com o Pycharm e criando Venv
+
+Agora vamos abrir o nosso projeto com o Pycharm e criar nosso ambiente virtual (venv).
+
+### 3.1 Abrindo o projeto
+
+Depois de abrir o pycharm na tela inicial selecione a opção `Open` para abrir um projeto já existente, na nova janela que irá abrir, navegue até a pasta do seu projeto, selecione e clique em `OK`, com isso o seu projeto deve ser aberto dentro da IDE.
+
+### 3.2 Criando o ambiente virtual (Venv)
+
+Ainda na interface da IDE vamos clicar no canto inferior direito onde você deve ver algo como `Interpreter` ou `Python 2.3` ou algo nesse sentido, escolhemos a opção `Add interpreter`, uma nova janela irá ser mostrada, clique na opção `Base Interpreter` e selecione a versão do python, caso ele não esteja sendo reconhecido na lista, será necessário ir até o local do arquivo clicando nos 3 pontos, depois de selecionado basta clicar em `OK` e finalizar a configuração.
