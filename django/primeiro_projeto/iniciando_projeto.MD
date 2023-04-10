@@ -111,3 +111,10 @@ python manage.py startapp basic
 ```
 
 Com isso um novo app será criado e na sua árvore de arquivos uma nova pasta será mostrada com o nome `basic`, geralmente quando iniciamos um projeto o primeiro app deixamos como uma base para os demais, um app de configurações gerais do projeto principal, e criamos novos apps para os contextos que vamos trabalhar.
+
+
+## Próximo Passo
+
+Terminamos a primeira parte do nosso estudo aqui, no próximo passo veremos sobre modelos, para seguir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./modelo.MD) - Trabalhando com modelos.

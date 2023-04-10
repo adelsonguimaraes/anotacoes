@@ -11,4 +11,4 @@ O Django é um poderoso ``Framework`` para trabalhar com desenvolvimento na tecn
 4. [Trabalhando com Receiver](trabalhando_com_receiver.MD) - Como utilizar Triggers (Receiver) no Django.
 5. [Usando Redis (Message Broker)](usando_redis_message_broker.MD) - Como utilizar o Celery Redis para fazer Message Broker com Websocket.
 6. [Utilizando Cadastro de Usuários Admin](cadastro_usuarios_admin.MD) - Como utilizar cadastro de usuários do Django Admin.
-7. [Iniciando projeto django](iniciando_projeto.MD) - Como iniciar um projeto com Django.
+7. [Iniciando projeto django](./primeiro_projeto/README.MD) - Primeiro projeto com Django.
