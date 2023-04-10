@@ -97,6 +97,8 @@ python manage.py migrate
 ```
 No fim da execução o Django irá criar e atualizar o banco de dados com as tabelas referentes aos modelos referenciados nas migrations, tanto as próprias tabelas do django quando as tabelas referentes aos nossos modelos.
 
+## 5. Conectando ao banco de dados com Pycharm
+
 Para verificar isso podemos acessar a aba lateral direita do pycharm com o nome `database`, clicar no botão com sinal de `+`, navegar na opção `Data Source` e escolher a opção `SQLite`, uma janela irá abrir, nela vamos configurar nosso banco de dados.
 Na raiz do projeto foi criado um novo arquivo chamado `db.sqlite3` quando rodamos o comando `migrate`, esse arquivo é o nosso banco de dados em `SQLite` esse nome pode ser modificado no arquivo `sale/settings`, no campo nome pode ser colocado o nome que você achar melhor pro contexto aqui vamos chamar apenas de `db`, no campo `file` clique nos três pontos e encontre o nosso arquivo `db.sqlite3` e selecione, agora na parte de baixo você verá uma mensagem `Download missing driver files`, que significa que a IDE ainda não possui o drive necessário para conectar com o banco de dados, podemos resolver isso apenas clicando no botão `download`, a IDE irá baixar o drive, por fim basta clicar em `Test Connection` para que o pycharm faça o teste de conexão, se aparecer a mensagem de sucesso, tudo deu certo, clique em `apply` e em seguida `OK`.
 
