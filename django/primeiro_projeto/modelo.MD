@@ -156,3 +156,7 @@ Podemos verificar novamente na lista do nosso aplicativo `basic` que existe uma 
 python manage.py migrate
 ```
 Agora podemos acessar pela aba database nossa tabela e verificar os campos dela expandindo pelo icone `>` e também expandir `columns` podemos verificar que um novo campo chamado `gender` foi criado, se caso não tenha aparecido o campo pode ser que falte atualizar a visão dos dados, para isso basta no topo da aba clicar no ícone de refresh.
+
+Aqui finalizamos o nosso estudo sobre modelos, agora nosso próximo passo é entender sobre `serializers`, para seguir para o próximo estudo clique no link abaixo.
+
+[Próximo passo](./serializador.MD) - Trabalhando com serializadores.
