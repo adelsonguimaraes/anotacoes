@@ -76,6 +76,27 @@ Para garantir que sua venv foi configurada corretamente no projeto, no memso loc
 
 ## 4. Instalando o Django na Venv e Congelando as configurações
 
-Agora que já estamos com o nosso ambiente virtual do projeto configurado, vamos instalar o django dentro dele pra utilizar em nosso projeto, para isso dentro do terminal do pycharm rode o seguinte comando.
+Agora que já estamos com o nosso ambiente virtual do projeto configurado, vamos instalar o django dentro dele pra utilizar em nosso projeto.
 
-> pip install django
+### 4.1 Instalando o Django
+
+Dentro do terminal do pycharm rode o seguinte comando.
+
+```sh
+pip install django
+```
+
+### 4.2 Congelando as configurações
+
+Vamos congelar as configurações, ou seja vamos criar um arquivo de configuração dos pacotes utilizados e necessários para rodar nosso projeto, para que quando for necessário rodar o projeto em outro ambiente seja fácil instalar os pacotes necessários.
+Para criar esse arquivos dentro do terminal do pycharm rode o seguinte comando.
+
+```sh
+pip freeze > requirements.txt
+```
+
+Após a finalização um arquivo será criado na raiz do projeto chamado `requirements.txt` nesse arquivo irá conter todos os pacotes utilizados no projeto até o momento. No sentido inverso quando necessário instalar estes pacotes em outro ambiente basta rodar o seguinte comando.
+
+```sh
+pip install -r requirements.txt
+```
