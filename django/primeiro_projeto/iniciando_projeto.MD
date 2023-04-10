@@ -112,6 +112,15 @@ python manage.py startapp basic
 
 Com isso um novo app será criado e na sua árvore de arquivos uma nova pasta será mostrada com o nome `basic`, geralmente quando iniciamos um projeto o primeiro app deixamos como uma base para os demais, um app de configurações gerais do projeto principal, e criamos novos apps para os contextos que vamos trabalhar.
 
+Para finalizar, precisamos registrar nosso `app` no arquivo `settings`, para isso abra o arquivo `sale/settings.py`, na sessão `INSTALLED_APPS` adicione a seguinte linha.
+
+```py
+INSTALLED_APPS = [
+    ...
+    'basic.apps.BasicConfig',
+]
+```
+Pronto, finalizamos a configuração do nosso novo aplicativo.
 
 ## Próximo Passo
 

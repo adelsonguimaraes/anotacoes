@@ -68,3 +68,36 @@ Agora vamos ver a classe Meta que é utilizada para fazer configurações que o 
 Nosso primeiro atributo aqui é `db_table` que serve para dizer para o Django qual deve ser o nome da tabela referente a esse modelo no banco de dados.
 
 O segundo atributo é `managed` que serve para dizer que queremos que o Django gerencie a tabela no banco de dados referente a esse modelo, com isso, tudo que mudarmos no modelo o Django irá refletir na tabela do banco de dados.
+
+## 2. Criando as migrações
+
+No Django quando queremos refletir os modelos ou modificações dos mesmos no banco de dados criamos `migrations`, com elas o django consegue gerenciar as modificações que são feitas nos modelos e atualizar o banco de dados pra que os campos das tabelas fiquem alinhadas.
+Para gerar os arquivos de migrations rodamos o seguinte comando no terminal do pycharm.
+
+```sh
+python manage.py makemigrations
+```
+Após rodar o comando um novo arquivo será gerado dentro de `basic/migrations`, esse arquivo é responsável por fazer as modificações dos modelos desse aplicativo, quando modificamos alguma coisa no modelo seja adicionando, modificando ou removendo, precisamos rodar novamente este comando e gerar novos arquivos de gerenciamento.
+
+## 3. Exibindo as migrações
+
+Para podermos ver as migrations do projeto e saber o que já está sincronizado no banco e o que falta sincronizar, podemos rodar o comando a seguir.
+
+```sh
+python manage.py showmigrations
+```
+Uma lista será mostrada no terminal separando as migrations por aplicativo, na lista do nosso aplicativo basic será possível ver a migration que acabamos de gerar chamada de `[ ] 0001_initial`, também é possível ver várias migrations de outros aplicativos e de gerenciamento do Django, podemos perceber ainda que ao lado de cada migration existe um check que mostra se a migration foi executada ou não.
+
+## 4. Executando as migrações
+
+Nossas migrações ainda não causaram efeito no nosso banco de dados, para que isso ocorra precisamos rodar outro comando.
+
+```sh
+python manage.py migrate
+```
+No fim da execução o Django irá criar e atualizar o banco de dados com as tabelas referentes aos modelos referenciados nas migrations, tanto as próprias tabelas do django quando as tabelas referentes aos nossos modelos.
+
+Para verificar isso podemos acessar a aba lateral direita do pycharm com o nome `database`, clicar no botão com sinal de `+`, navegar na opção `Data Source` e escolher a opção `SQLite`, uma janela irá abrir, nela vamos configurar nosso banco de dados.
+Na raiz do projeto foi criado um novo arquivo chamado `db.sqlite3` quando rodamos o comando `migrate`, esse arquivo é o nosso banco de dados em `SQLite` esse nome pode ser modificado no arquivo `sale/settings`, no campo nome pode ser colocado o nome que você achar melhor pro contexto aqui vamos chamar apenas de `db`, no campo `file` clique nos três pontos e encontre o nosso arquivo `db.sqlite3` e selecione, agora na parte de baixo você verá uma mensagem `Download missing driver files`, que significa que a IDE ainda não possui o drive necessário para conectar com o banco de dados, podemos resolver isso apenas clicando no botão `download`, a IDE irá baixar o drive, por fim basta clicar em `Test Connection` para que o pycharm faça o teste de conexão, se aparecer a mensagem de sucesso, tudo deu certo, clique em `apply` e em seguida `OK`.
+
+Agora você irá ver na aba de DataBase que irá aparecer um banco com nome `db` clique no ícone de `>` para expandir as opções faça o mesmo para `main` e `tables`, aqui veremos todas as tabelas existentes no nosso banco de dados, podemos ver as tabelas de gerenciamento que o django utiliza, essas não devemos mexer, e também veremos a nossa tabela chamada `employee`.
