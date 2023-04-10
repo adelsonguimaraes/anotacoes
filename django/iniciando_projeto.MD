@@ -1,4 +1,4 @@
-# Iniciando um projeto com Django
+# Iniciando um projeto com Django 
 
 Aqui veremos como iniciar do zero um projeto com Django, assim também como tudo que é necessário para realizar está atividade.
 
@@ -71,3 +71,5 @@ Depois de abrir o pycharm na tela inicial selecione a opção `Open` para abrir 
 ### 3.2 Criando o ambiente virtual (Venv)
 
 Ainda na interface da IDE vamos clicar no canto inferior direito onde você deve ver algo como `Interpreter` ou `Python 2.3` ou algo nesse sentido, escolhemos a opção `Add interpreter`, uma nova janela irá ser mostrada, clique na opção `Base Interpreter` e selecione a versão do python, caso ele não esteja sendo reconhecido na lista, será necessário ir até o local do arquivo clicando nos 3 pontos, depois de selecionado basta clicar em `OK` e finalizar a configuração.
+
+Para garantir que sua venv foi configurada corretamente no projeto, no memso local no canto inferior direito deve aparecer a versão do python e o nome da sua venv.
