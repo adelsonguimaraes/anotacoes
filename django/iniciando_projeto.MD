@@ -73,3 +73,9 @@ Depois de abrir o pycharm na tela inicial selecione a opção `Open` para abrir 
 Ainda na interface da IDE vamos clicar no canto inferior direito onde você deve ver algo como `Interpreter` ou `Python 2.3` ou algo nesse sentido, escolhemos a opção `Add interpreter`, uma nova janela irá ser mostrada, clique na opção `Base Interpreter` e selecione a versão do python, caso ele não esteja sendo reconhecido na lista, será necessário ir até o local do arquivo clicando nos 3 pontos, depois de selecionado basta clicar em `OK` e finalizar a configuração.
 
 Para garantir que sua venv foi configurada corretamente no projeto, no memso local no canto inferior direito deve aparecer a versão do python e o nome da sua venv.
+
+## 4. Instalando o Django na Venv e Congelando as configurações
+
+Agora que já estamos com o nosso ambiente virtual do projeto configurado, vamos instalar o django dentro dele pra utilizar em nosso projeto, para isso dentro do terminal do pycharm rode o seguinte comando.
+
+> pip install django
