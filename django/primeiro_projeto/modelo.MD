@@ -103,3 +103,40 @@ Para verificar isso podemos acessar a aba lateral direita do pycharm com o nome 
 Na raiz do projeto foi criado um novo arquivo chamado `db.sqlite3` quando rodamos o comando `migrate`, esse arquivo é o nosso banco de dados em `SQLite` esse nome pode ser modificado no arquivo `sale/settings`, no campo nome pode ser colocado o nome que você achar melhor pro contexto aqui vamos chamar apenas de `db`, no campo `file` clique nos três pontos e encontre o nosso arquivo `db.sqlite3` e selecione, agora na parte de baixo você verá uma mensagem `Download missing driver files`, que significa que a IDE ainda não possui o drive necessário para conectar com o banco de dados, podemos resolver isso apenas clicando no botão `download`, a IDE irá baixar o drive, por fim basta clicar em `Test Connection` para que o pycharm faça o teste de conexão, se aparecer a mensagem de sucesso, tudo deu certo, clique em `apply` e em seguida `OK`.
 
 Agora você irá ver na aba de DataBase que irá aparecer um banco com nome `db` clique no ícone de `>` para expandir as opções faça o mesmo para `main` e `tables`, aqui veremos todas as tabelas existentes no nosso banco de dados, podemos ver as tabelas de gerenciamento que o django utiliza, essas não devemos mexer, e também veremos a nossa tabela chamada `employee`.
+
+## 6. Alterando o modelo
+
+Aprendemos até aqui como fazemos para criar um modelo e refletir essa criação no banco de dados, também mencionamos que é possível não só fazer essa sincronia na criação nas também em modificações, sejam elas alterações ou remoções.
+
+Agora vamos ver como funciona esse processo para quando precisamos fazer uma alteração no nosso modelo.
+
+```py
+class Employee(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, null=False)
+    salary = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    gender = models.CharField(max_length=1, null=False)
+
+    class Meta:
+        db_table = 'employee'
+        managed = True
+```
+
+Acima adicionamos no nosso modelo um campo chamado `gender`, agora para refletir isso nosso banco de dados vamos novamente rodar o comando para criar a nova `migration`.
+
+```sh
+python manage.py makemigration
+```
+
+Em seguida vamos rodar novamente o comando para mostrar as migrations que foram geradas.
+
+```sh
+python manage.py showmigrations
+```
+
+Podemos verificar novamente na lista do nosso aplicativo `basic` que existe uma migration nova que ainda não foi executada chamada `0002_employee_gender`, para executar nossa migration rodamos novamente o comando.
+
+```sh
+python manage.py migrate
+```
+Agora podemos acessar pela aba database nossa tabela e verificar os campos dela expandindo pelo icone `>` e também expandir `columns` podemos verificar que um novo campo chamado `gender` foi criado, se caso não tenha aparecido o campo pode ser que falte atualizar a visão dos dados, para isso basta no topo da aba clicar no ícone de refresh.
