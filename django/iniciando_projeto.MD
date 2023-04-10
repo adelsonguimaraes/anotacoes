@@ -100,3 +100,14 @@ Após a finalização um arquivo será criado na raiz do projeto chamado `requir
 ```sh
 pip install -r requirements.txt
 ```
+
+## 5. Criando um novo aplicativo
+
+Dentro de um projeto Django podemos ter vários aplicativos e eles conseguem se comunicar entre si, isso é bom pra quando desejamos organizar o projeto dividindo os contextos, funciona como se fosse uma modularização do projeto, por exemplo um projeto para controle de uma empresa poderiamos ter os contextos, rh, comercial e produção.
+Vamos criar um aplicativo chamado basic, para isso use o seguinte comando no terminal do pycharm.
+
+```sh
+python manage.py startapp basic
+```
+
+Com isso um novo app será criado e na sua árvore de arquivos uma nova pasta será mostrada com o nome `basic`, geralmente quando iniciamos um projeto o primeiro app deixamos como uma base para os demais, um app de configurações gerais do projeto principal, e criamos novos apps para os contextos que vamos trabalhar.
