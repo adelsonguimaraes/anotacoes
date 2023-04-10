@@ -52,3 +52,19 @@ models.DecimalField(max_digits=10, decimal_places=2, null=False)
 Aqui estamos configurando que o campo será do tipo `Decimal` com `10` dígitos e que não permite valor `nulo`.
 
 ## 1.3 Classe interna Meta
+
+Agora vamos ver a classe Meta que é utilizada para fazer configurações que o django precisa para gerenciar o modelo.
+
+```py
+...
+    salary = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+
+    class Meta
+        db_table = 'employee'
+        managed = True
+```
+É chamada de classe interna pois fica dentro da outra classe na mesma direção da identação dos atríbutos da classe, os atributos da classe `Meta` também devem ser identados com um tab para dentro.
+
+Nosso primeiro atributo aqui é `db_table` que serve para dizer para o Django qual deve ser o nome da tabela referente a esse modelo no banco de dados.
+
+O segundo atributo é `managed` que serve para dizer que queremos que o Django gerencie a tabela no banco de dados referente a esse modelo, com isso, tudo que mudarmos no modelo o Django irá refletir na tabela do banco de dados.
