@@ -157,6 +157,23 @@ python manage.py migrate
 ```
 Agora podemos acessar pela aba database nossa tabela e verificar os campos dela expandindo pelo icone `>` e também expandir `columns` podemos verificar que um novo campo chamado `gender` foi criado, se caso não tenha aparecido o campo pode ser que falte atualizar a visão dos dados, para isso basta no topo da aba clicar no ícone de refresh.
 
+
+## 7. Praticando
+
+Para praticar tudo que fizemos até aqui agora crie o seguinte modelo no seu projeto e faça todo o processo até atualizar o banco de dados
+
+```py
+class Course(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=40, null=False)
+    created_at = models.DateTimeField(null=False, auto_now_add=True)
+    modified_at = models.DateTimeField(null=False, auto_now=True)
+
+    class Meta:
+        db_table = 'course'
+        managed = True
+```
+
 Aqui finalizamos o nosso estudo sobre modelos, agora nosso próximo passo é entender sobre `serializers`, para seguir para o próximo estudo clique no link abaixo.
 
 [Próximo passo](./serializador.MD) - Trabalhando com serializadores.
