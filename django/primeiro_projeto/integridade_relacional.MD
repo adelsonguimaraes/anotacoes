@@ -35,3 +35,7 @@ Aqui temos o atríbuto `course` que é do tipo `ForeugnKey`, ou seja, é do tipo
 Com essa configuração desse atríbuto o Django entende que existe um relacionamento entre a classe `Couse` e `Student` e também irá refletir isso no banco de dados, assim a tabela de estudante recebendo a chave estrangeria de curso para cada registro.
 
 Agora basta fazer o processo de migrations que aprendemos anteriormente para fazer com que nossa atualizações sejam refletidas no banco de dados, com isso terminamos o nosso estudo sobre `Integridade relacional`.
+
+No nosso próximo estudo vamos ver sobre o Django admin, para ir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./django_admin.MD) - Trabalhando com Django Admin.
