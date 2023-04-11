@@ -35,3 +35,7 @@ urlpatterns = [
 ```
 
 Agora para testar se nossa rota foi configurada corretamente vamos acessar o nosso endpoint, no endereço `http://localhost:8000/school/course/`.
+
+Aqui terminamos o nosso estudo sobre as `url`, no nosso próximo estudo veremos como aplicar o conceito de herança no Django, para seguir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./model_base.MD) - Trabalhando com Model Base (Herança).

@@ -1,0 +1,1 @@
+# Model Base (Herança) Django
