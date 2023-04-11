@@ -14,7 +14,7 @@ from basic import viewsets
 router = DefaultRouter()
 router.register('course', viewsets.CourseViewSet)
 
-urlspatterns = router.urls
+urlpatterns = router.urls
 
 ```
 
@@ -34,4 +34,4 @@ urlpatterns = [
 ]
 ```
 
-Agora para testar se nossa rota foi configurada corretamente vamo acessar o nosso endpoint, no endereço `http://localhost:8000/school/course/`.
+Agora para testar se nossa rota foi configurada corretamente vamos acessar o nosso endpoint, no endereço `http://localhost:8000/school/course/`.
