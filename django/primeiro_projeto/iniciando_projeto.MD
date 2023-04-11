@@ -86,7 +86,23 @@ Dentro do terminal do pycharm rode o seguinte comando.
 pip install django
 ```
 
-### 4.2 Congelando as configurações
+### 4.2 Instalando o rest framework
+
+Vamos instalar o rest framework, para isso no terminal do pycharm rode o seguinte comando.
+
+```sh
+pip install djangorestframework
+```
+Em seguida precisamos adicionar em `sale/settings` na sessão `INSTALLED_APPS` a seguinte linha.
+
+```py
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
+
+### 4.3 Congelando as configurações
 
 Vamos congelar as configurações, ou seja vamos criar um arquivo de configuração dos pacotes utilizados e necessários para rodar nosso projeto, para que quando for necessário rodar o projeto em outro ambiente seja fácil instalar os pacotes necessários.
 Para criar esse arquivos dentro do terminal do pycharm rode o seguinte comando.
