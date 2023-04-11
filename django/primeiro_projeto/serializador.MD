@@ -25,3 +25,6 @@ Por convenção criamos a classe com o mesmo nome do nosso modelo com adição d
 
 Na nossa classe interna `Meta` informamos qual o modelo que esse serializador irá usar `models.Course` e os camos que devem ser serializados, nesse caso vamos utilizar `'__all__'` informando que todos os campos do modelo devem ser serializado, mas também podemos passar uma lista `[]` informando os campos específicos.
 
+Aqui finalizamos o nosso estudo sobre os sreializadores, nosso próximo passo é aprender sobre os `viewsets`, para seguir para o próximo estudo clique no link abaixo.
+
+[Próximo passo](./viewset.MD) - Trabalhando com viewsets.
