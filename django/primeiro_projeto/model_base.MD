@@ -30,3 +30,7 @@ class Course(ModelBase):
 ```
 
 Assim aplicamos nosso conceito de herança, criando a nossa super classe `ModelBase` e injetando ela nas demais classes para herdar seus atríbutos e funções, interessante observar que nossa classe `ModelBase` injeta como dependência de herança a `models.Model`, então assim todas as outras classes que injetarem nossa super class também estarão injetando os comportamentos de `models.Model`.
+
+Aqui terminanos nosso estudo sobre `herança`, nosso próximo estudo será sobre integridade relacional entre classes, para seguir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./integridade_relacional.MD) - Trabalhando com Integridade Relacional.
