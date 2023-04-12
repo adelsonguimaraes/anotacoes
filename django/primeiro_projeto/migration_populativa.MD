@@ -62,3 +62,7 @@ Podemos observar que a nossa migration agora aparece na lista como não executad
 python manage.py migrate
 ```
 Nossa migration será executada e a tabela do campo será alimentada.
+
+Aqui finalizamos o nosso estudo sobre migration populativa, nosso próximo estudo é sobre a configuração do projeto para usar o banco de dados postgres, para seguir pra o próximo estudo clique no link a seguir.
+
+[Próximo passo](./conectando_postgres.MD) - Trabalhando com Postgres e Django.
