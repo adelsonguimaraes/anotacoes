@@ -46,7 +46,7 @@ class StudentCourse(ModelBase):
 Aqui como já vimos anteriormente criamos uma classe com atributos com relacionamento com outra classe, a diferença aqui está na linha.
 
 ```py
-unique_together = [('student', 'course',)]
+unique_together = [('student', 'course')]
 ```
 Dentro da nossa classe `Meta` temos essa configuração, que significa que os dois campos devem ser de combinação única, ou seja, a combinação do valor dos campos não poderá se repetir, o que traduzindo diz que um estudante só poderar estar matrículado em um curso uma única vez.
 
@@ -70,5 +70,25 @@ class Student(ModelBase):
 
     class Meta:
         db_table = 'student'
-          
-Como nesse caso estamos apenas exemplificando, não iremos criar às migrations, aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
+```     
+Como nesse caso estamos apenas exemplificando, não iremos criar às migrations. 
+
+## 3. Alimentando a tabela relacional
+
+Vamos agora fazer um pequeno script que irá alimentar a nossa tabela de relacionamento `StudentCourse`, para isso vamos abrir nossa aba `Python Console` no rodapé da nossa IDE pycharm, insirá o script a seguir e rode para executar a alimentação dos dados.
+
+```py
+from basic import models
+
+students = models.Student.objects.all()
+courses = models.Course.objects.all()
+
+for s in students:
+    for c in courses:
+        cs = models.StudentCourse()
+        cs.course = c
+        cs.student = s
+        cs.save()
+```
+
+Aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
