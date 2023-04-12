@@ -91,4 +91,44 @@ for s in students:
         cs.save()
 ```
 
+## 4. Crian a ponte entre as classes
+
+Agora vamos ver como criar uma "ponte" nas classes relacionadas para o acesso via django ser muito mais fácil, para isso vamos adicionar nas duas classe o que vimos mais acima o `ManyToMany`, a diferença aqui é que já temos a nossa classe associativa criada, e vamos informar para o Django qual é essa classe, assim ele não irá criar uma tabela automáticamente e usará a nossa.
+
+```py
+class Course(ModelBase):
+    name = models.CharField(max_length=40, null=False)
+    students = models.ManyToManyField(
+        to="Student",
+        through="StudentCourse"
+    )
+
+    class Meta:
+        db_table = 'course'
+        managed = True
+
+
+class Student(ModelBase):
+    name = models.CharField(max_length=100, null=False)
+    courses = models.ManyToManyField(
+        to="Course",
+        through="StudentCourse"
+    )
+
+    class Meta:
+        db_table = 'student'
+        managed = True
+```
+Nossas classes ficarão dessa forma, perceba que dentro do ManyToMany temos duas configurações, o `to` que é onde referenciamos a classe de relacionamento e o `through` que aponta qual é a class associativa, com essa configuração agora podemos fazer as consultas de estudantes e cursos e cursos de alunos diretamente, segue um exemplo abaixo mostrando todos os alunos matriculados em um curso.
+
+```py
+from basic import models
+
+course = models.Course
+course = models.Course.objects.first()
+
+for s in course.students.all():
+    print(s.name)
+```
+
 Aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
