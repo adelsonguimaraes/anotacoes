@@ -131,4 +131,6 @@ for s in course.students.all():
     print(s.name)
 ```
 
-Aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
+Aqui finalizamos nosso estudo sobre `múltiplo relacionamento`, no nosso próximo estudo vamos entender como podemos fazer no caso de relacionamento de 1 para 1, com `Related Name`, para seguir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./related_name.MD) - Trabalhando com Related Name.
