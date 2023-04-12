@@ -7,3 +7,11 @@ Abaixo segue o sumário do nosso estudo, bom estudo.
 
 1. [Iniciando](./iniciando_projeto.MD) - Iniciando um projeto Django
 2. [Model](./modelo.MD) - Trabalhando com modelos.
+3. [Serializer](./serializador.MD) - Trabalhando com serializadores.
+4. [Viewset](./viewset.MD) - Trabalhando com viewset.
+5. [Urls](./urls.MD) - Trabalhando com urls.
+6. [Herança](./model_base.MD) - Trabalhando com ModelBase (herança).
+7. [Integridade Relacional](./integridade_relacional.MD) - Trabalhando com Integridade Relacional (Relacionamento entre modelos).
+8. [Django Admin](./django_admin.MD) - Trabalhando com Django Admin.
+9. [Migration Populativa](./migration_populativa.MD) - Trabalhando com migration populativa.
+10. [Conectando Postgres](./conectando_postgres.MD) - Trabalhando com postgres.
