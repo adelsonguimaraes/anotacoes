@@ -55,3 +55,7 @@ Agora podemos acessar a interface no navegador pelo caminho.
 > http://localhost:8000/admin/basic/course/
 
 A interface é mostrada onde você pode fazer todas as opções de gerenciamente dos dados, listagem, cadastro, edição e remoção de dados.
+
+Com isso finalizamos o nosso estudo sobre Django Admin, nosso próximo passo é estudar sobre dados iniciais via migrations, para ir para o próximo estudo clique no link abaixo.
+
+[Próximo passo](./migration_populativa.MD) - Trabalhando com Migration Populativa Django.
