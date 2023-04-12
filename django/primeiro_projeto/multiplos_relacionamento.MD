@@ -56,4 +56,19 @@ Agora precisamos novamente criar e rodar nossas migrations para que nossa nova c
 python manage.py makemigrations
 python manage.py migrate
 ```
-Aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
+# 2. Alternativa
+
+Uma alternativa para esse relacionamento é utilizar a automatização do Django, geralmente quando o relacionamento é simples e não possui atributos que serão manipulados além dos relacionamentos podemos utilizar essa forma, porém não teremos controles sobre a sua estrutura.
+Nesse caso não criariamos a nossa classe de relacionamento, apenas alterariamos a classe `Student`, veja o modelo abaixo.
+
+```py
+class Student(ModelBase):
+    name = models.CharField(max_length=100, null=False)
+    students = models.ManyToManyField(
+        to="Student"
+    )
+
+    class Meta:
+        db_table = 'student'
+          
+Como nesse caso estamos apenas exemplificando, não iremos criar às migrations, aqui finalizamos nosso estudo sobre `múltiplo relacionamento`.
