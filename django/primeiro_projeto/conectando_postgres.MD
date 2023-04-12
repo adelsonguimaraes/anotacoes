@@ -35,4 +35,6 @@ Se tudo aqui foi configurado corretamente, podemos executar nossas migrations pa
 ```sh
 python manage.py migrate
 ```
-Pronto agora nosso projeto está configurado com o banco de dados `Postgres`. Aqui termina nosso estudo de como conectar o Django com o banco Postgres.
+Pronto agora nosso projeto está configurado com o banco de dados `Postgres`. Aqui termina nosso estudo de como conectar o Django com o banco Postgres, nosso próximo passo é estudar sobre `Múltiplos Relacionamentos`, para seguir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./multiplo_relacionamento.MD) - Trabalhando com múltiplos relacionamentos.
