@@ -41,7 +41,15 @@ class StudentCourse(ModelBase):
     class Meta:
         db_table = "student_course"
         managed = True
+        unique_together = [('student', 'course')]
 ```
+Aqui como já vimos anteriormente criamos uma classe com atributos com relacionamento com outra classe, a diferença aqui está na linha.
+
+```py
+unique_together = [('student', 'course')]
+```
+Dentro da nossa classe `Meta` temos essa configuração, que significa que os dois campos devem ser de combinação única, ou seja, a combinação do valor dos campos não poderá se repetir, o que traduzindo diz que um estudante só poderar estar matrículado em um curso uma única vez.
+
 Agora precisamos novamente criar e rodar nossas migrations para que nossa nova classe de relacionamento seja refletida no banco de dados.
 
 ```sh
