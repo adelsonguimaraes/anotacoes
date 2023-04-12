@@ -29,3 +29,29 @@ Um passo a passo irá aparecer pedindo, `nome`, `email` e `senha`, se nenhum nom
 Após realizar o processo basta inserir os dados de usuário e senha na interface web e acessar o painel admin.
 
 # 3. Criando uma interface
+
+Agora que já acessamos nosso painel, vamos criar uma interface para nossa classe `Course`, o processo para isso é muito simples, primeiramente acesse o arquivo `basic/admin.py` e dentro dele adicione o seguinte código.
+
+```py
+from django.contrib import admin
+from basic import models
+
+
+@admin.register(models.Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'updated_at', 'active']
+    list_display_links = ['id', 'name', 'updated_at', 'active']
+    search_fields = ['name']
+    list_filter = ['active']
+
+```
+
+Como podemos ver é um código bem simples usando os mesmo conceitos que usamos anteriormente, nesse caso precisamos registrar o modelo no `admin` para que possamos utilizar, isso é feito no seguinte trecho de código `@admin.register(models.Course)`.
+Os dois primeiros atributos da classe `list_display` e `list_display_links` são referentes aos campos do modelo que desejamos exibir na tela e qual delas são `links clicáveis` para navegar para o formulário de detalhes e edição.
+O Terceiro campo é referente aos campos que desejamos poder filtrar, e o quarto é referente a uma lista de filtros que aparece na lateral.
+Existem outros campos que podem ser configurados e todos podem ser verificados na documentação.
+Agora podemos acessar a interface no navegador pelo caminho.
+
+> http://localhost:8000/admin/basic/course/
+
+A interface é mostrada onde você pode fazer todas as opções de gerenciamente dos dados, listagem, cadastro, edição e remoção de dados.
