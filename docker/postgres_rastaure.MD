@@ -1,4 +1,4 @@
-# Reustando banco de dados Postegres
+# Restaurando banco de dados Postegres
 
 Olá, aqui vamos estudar como restaurar um banco de dados a partir de arquivos no postgres rodando em um container docker.
 
