@@ -39,4 +39,6 @@ class_room = models.ClassRoom.objects.first()
 for s in class_room.students.all()
     print(s.name)
 ```
-No exemplo assim pegamos a primeira classe, e em seguida fazemos um laço que percorre todos os estudantes que estão naquela classe, podemos perceber que utilizamos a ponte `students` que é nosso `related_name`. Aqui finalizamos o nosso estudo sobre related name.
+No exemplo assim pegamos a primeira classe, e em seguida fazemos um laço que percorre todos os estudantes que estão naquela classe, podemos perceber que utilizamos a ponte `students` que é nosso `related_name`. Aqui finalizamos o nosso estudo sobre related name, nosso próximo estudo irá abordar consultas de dados com o Django, para ir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./queries.MD) - Trabalhando com Queries (Consultas).
