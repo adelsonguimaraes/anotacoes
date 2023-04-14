@@ -133,3 +133,15 @@ from basic import models
 models.Student.objects.exclude(name__icontains='Joao')
 ```
 Agora nossa consulta gera uma lista de estudantes, porém não traz nenhum que tenha o nome Joao, isso porque mandandos ele excluir essa informação da consulta.
+
+## 12. Adicionando coluna na consulta (annotate)
+
+Agora vamos ver como podemos adicionar colunas na nossa consulta, isso é interessante quando queremos adicionar campos que não existem no modelo, ou até mesmo modificar um nome por outro, para isso vamos precisar importar um novo método chamado `Value` do módulo `django.db.models` ele será necessário para associar o valor ao campo, abaixo vamos ver um exemplo para entender melhor.
+
+```py
+from basic import models
+from django.db.models import Value
+
+models.Student.objects.annotate(turno=Value('Matutino')).values('id', 'name', 'turno')
+```
+Acima agora vemos o nosso modelo de consulta, estamos utilizando um método do manager chamado `annotate` que é justamente o que precisamos para criar ou alterar nome de campos, dentro dele podemos perceber o seguinte `turno=Value('Matutino')`, estamos dizendo que um campo turno receber o método `Value()` que importamos, e dentro do método estamos informando o valor `Matutino`, ou seja nosso campo irá se chamar `turno` e o seu valor será `Matutino`, em seguida precisamos utilizar o método `values()` do manager selecionando os campos `id`, `name` e o nosso campo `turno`, utilizar esse método é opcional, utilizamos aqui pra saída dos daos ser mais limpa, se não usarmos ele a consulta trará todos os campos do modelo mais o nosso campo `turno`.
