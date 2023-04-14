@@ -107,3 +107,14 @@ from django.db.models import Q
 models.Student.objects.filter(Q(name='Joao') | Q(name='Pedro'))
 ```
 Agora podemos reparar que para fazer o uso do "ou" preciamos importar uma lib chamada `Q` que vem do pacote `django.db.models`, em seguida utilizamos ela dentro do nosso filtro, antes apenas colocaríamos `name='Joao'`, agora envolvemos isso com o `Q` e fica `Q(name='Joao')`, além disso para nosso "ou" ficar completo precisamos colocar a segunda condição então separamos com o símbolo `|(pipe)` e fica assim `| Q(name='Pedro')`, com isso nossa consulta diz que queremos uma lista de estudantes que o nome pode ser Joao ou Pedro.
+
+## 11. Fazendo consultas excluindo dados
+
+Agora vamos ver uma forma de consulta que funciona de forma inversa ao filter, ou seja, no filter passamos condições que queremos que estejam, no caso do exclude passamos condições que queremos que estejam nos dados mas que queremos que a consulte ignore, por exemplo, podemos fazer uma consulta mandando listar todos os estudantes, porém, dizendo pra ignorar todos que tenham o nome Joao.
+
+```py
+from basic import models
+
+models.Student.objects.exclude(name__icontains='Joao')
+```
+Agora nossa consulta gera uma lista de estudantes, porém não traz nenhum que tenha o nome Joao, isso porque mandandos ele excluir essa informação da consulta.
