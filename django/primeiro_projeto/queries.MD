@@ -158,3 +158,14 @@ models.Student.objects.annotate(soma=ExpressionWrapper(Value(10) + Value(10), Fl
 ```
 Podemos perceber que o que vimos no tópico anterior continuam sendo usados aqui, além disso que precisamos importar mais dois métodos, `ExpressionWrapper()` e `FloatField()`, o primeiro serve pra envolver nossa expressão, dentro dele que colocamos a expressão e temos um atributo chamado `output_field=` que precisamos usar para dizer qual será o tipo de saída da nossa expressão, no caso utilizamos o `FloatField()` pra sinalizar que será um float.
 
+## 14. Utilizando campos do modelo no annotate
+
+Até agora vimos como fazer campos extras com `annotate` e também vimos como fazer expressões matemáticas, utilizando o `Value`que serve para setar valores estáticos, agora vamos ver como fazer tudo isso porém usando campos do próximo modelo, para fazer isso vamos importar o método `F()` de `django.db.models`, com ele podemos acessar os campos do modelo.
+
+```py
+from basic import models
+from django.db.models import Value, ExpressionWrapper, FloatField, F
+
+models.Student.objects.annotate(soma=ExpressionWrapper(Value(10) + F('idade'), FloatField())).values('id', 'name', 'soma')
+```
+Acima temos o mesmo exemplo que utilizamos no tópico anterior, porém agora importamos o método `F()` dentro da nossa expressão apontamos que vamos somar o valor 10 com o campo idade `Value(10) + F('idade')`, assim no campo soma que criamos retornará a idade de cada aluno com + 10 de valor somado, deixando a nossa expressão dinâmica de acordo com os dados da base.
