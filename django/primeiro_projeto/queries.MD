@@ -145,3 +145,16 @@ from django.db.models import Value
 models.Student.objects.annotate(turno=Value('Matutino')).values('id', 'name', 'turno')
 ```
 Acima agora vemos o nosso modelo de consulta, estamos utilizando um método do manager chamado `annotate` que é justamente o que precisamos para criar ou alterar nome de campos, dentro dele podemos perceber o seguinte `turno=Value('Matutino')`, estamos dizendo que um campo turno receber o método `Value()` que importamos, e dentro do método estamos informando o valor `Matutino`, ou seja nosso campo irá se chamar `turno` e o seu valor será `Matutino`, em seguida precisamos utilizar o método `values()` do manager selecionando os campos `id`, `name` e o nosso campo `turno`, utilizar esse método é opcional, utilizamos aqui pra saída dos daos ser mais limpa, se não usarmos ele a consulta trará todos os campos do modelo mais o nosso campo `turno`.
+
+## 13. Utilizando expressões
+
+Seguindo a mesma linha que fizemos a cima, agora vamos ver como fazer expressões na consulta, para isso vamos utilizar o conhecimento que vimos acima mais um método chamado `ExpressionWrapper` que vamos importar de `django.db.models`.
+
+```py
+from basic import models
+from django.db.models import Value, ExpressionWrapper, FloatField
+
+models.Student.objects.annotate(soma=ExpressionWrapper(Value(10) + Value(10), FloatField())).values('id', 'name', 'soma')
+```
+Podemos perceber que o que vimos no tópico anterior continuam sendo usados aqui, além disso que precisamos importar mais dois métodos, `ExpressionWrapper()` e `FloatField()`, o primeiro serve pra envolver nossa expressão, dentro dele que colocamos a expressão e temos um atributo chamado `output_field=` que precisamos usar para dizer qual será o tipo de saída da nossa expressão, no caso utilizamos o `FloatField()` pra sinalizar que será um float.
+
