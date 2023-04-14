@@ -15,3 +15,6 @@ Abaixo segue o sumário do nosso estudo, bom estudo.
 8. [Django Admin](./django_admin.MD) - Trabalhando com Django Admin.
 9. [Migration Populativa](./migration_populativa.MD) - Trabalhando com migration populativa.
 10. [Conectando Postgres](./conectando_postgres.MD) - Trabalhando com postgres.
+11. [Múltiplo Relacionamento](./multiplo_relacionamento.MD) - Trabalhando com múltiplos relacionamentos.
+12. [Related Name](./related_name.MD) - Trabalhando com related name.
+13. [Queries](./queries.MD) - Trabalhando com queries.
