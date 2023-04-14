@@ -85,7 +85,7 @@ Essas constantes refletem consultas com `Where` na base de dados, essa é uma da
 
 > https://docs.djangoproject.com/en/4.2/topics/db/queries/#field-lookups
 
-### 9. Encadeando consultas
+## 9. Encadeando consultas
 
 Agora vamos ver que podemos encadear os métodos do manager, o que é muito importante quando precisamos fazer consultas que são mais complexas, abaixo um exemplo.
 
@@ -96,7 +96,7 @@ models.Student.objects.filter(name__icontains='Joao').values('id', 'name').order
 ```
 Acima temos uma consulta mais complexa que junta métodos do manager que vimos anteriormente, o que estamos dizendo aqui é que queremos filtrar os estudantes que tem o nome Joao, pegar apenas os campos id e name e ordenar de forma decrescente pelo id.
 
-### 10. Fazendo consultas com condição "OU"
+## 10. Fazendo consultas com condição "OU"
 
 Agora vamos ver como podemos fazer consultas onde queremos utilizar o ou, por exemplo, em uma consulta queremos trazer uma lista onde o nome do estudante pode ser Joao ou Pedro, por padrão as consultas são feitas com "&&", ou seja, as condições são aninhadas, todas as condições precisarão ser atendidas para o dado ser considerado, no exemplo que demos acima isso seria um problema, pois, não é possível um estudante se chamar Joao e Pedro o mesmo tempo, é ai que entra a utilização do "ou".
 
