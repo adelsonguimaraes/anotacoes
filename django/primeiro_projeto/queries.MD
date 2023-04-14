@@ -12,7 +12,7 @@ Vamos ver agora como é simples fazer uma consulta que lista todos os itens de u
 ```py
 models.Student.objects.all()
 ```
-Acima temos a consulta que irá trazer uma lista com todos os alunos que estiverem no banco de dados, perceba que a nossa consulta começa acessando o modelo `Student`, em seguida acessamos o manager(objects), e apartir dele chamamos uma função de consulta `all()`, o manager retorna um objeto interável que ele chamada de queryset, ou seja um objeto que é a query não executada, e apartir do momento que chamamos uma função de consulta como o all() ele faz a consulta no banco de dados.
+Acima temos a consulta que irá trazer uma lista com todos os alunos que estiverem no banco de dados, perceba que a nossa consulta começa acessando o modelo `Student`, em seguida acessamos o manager(objects), e apartir dele chamamos uma função de consulta `all()`, o manager retorna um objeto interável que ele chamada de queryset, ou seja um objeto que é a query não executada, e apartir do momento que chamamos uma função de consulta como o all() ele faz a consulta no banco de dados, importante ainda dizer que o resultado da nossa consulta traz uma lista de objetos do tipo do modelo que estamos utilizando
 
 ## 3. Pegando primeiro item
 
@@ -53,7 +53,7 @@ Nós também podemos fazer uma seleção dos campos que queremos mostrar em uma 
 ```py
 models.Student.objects.values('id', 'name')
 ```
-Na consulta acima utilizamos o values e informamos que das colunas que existem queremos apenas o `id` e o `name`, com isso ele irá trazer a lista dos estudantes apenas com os campos selecionados.
+Na consulta acima utilizamos o values e informamos que das colunas que existem queremos apenas o `id` e o `name`, com isso ele irá trazer a lista dos estudantes apenas com os campos selecionados, um ponto a ressaltar aqui é que quando utilizamos o values diferente da lista que ele traz no uso do método `all()` que retorna uma lista de objetos da classe, aqui nossa lista é de dicionários do python.
 
 ## 7. Filtrando dados
 
