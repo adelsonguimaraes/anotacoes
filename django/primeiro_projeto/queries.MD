@@ -71,3 +71,11 @@ Essas constantes refletem consultas com `Where` na base de dados, essa é uma da
 
 > https://docs.djangoproject.com/en/4.2/topics/db/queries/#field-lookups
 
+### 9. Encadeando consultas
+
+Agora vamos ver que podemos encadear os métodos do manager, o que é muito importante quando precisamos fazer consultas que são mais complexas, abaixo um exemplo.
+
+```py
+models.Student.objects.filter(name__icontais='Joao').values('id', 'name').order_by('-id')
+```
+Acima temos uma consulta mais complexa que junta métodos do manager que vimos anteriormente, o que estamos dizendo aqui é que queremos filtrar os estudantes que tem o nome Joao, pegar apenas os campos id e name e ordenar de forma decrescente pelo id.
