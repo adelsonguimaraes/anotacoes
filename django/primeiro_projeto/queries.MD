@@ -169,3 +169,20 @@ from django.db.models import Value, ExpressionWrapper, FloatField, F
 models.Student.objects.annotate(soma=ExpressionWrapper(Value(10) + F('idade'), FloatField())).values('id', 'name', 'soma')
 ```
 Acima temos o mesmo exemplo que utilizamos no tópico anterior, porém agora importamos o método `F()` dentro da nossa expressão apontamos que vamos somar o valor 10 com o campo idade `Value(10) + F('idade')`, assim no campo soma que criamos retornará a idade de cada aluno com + 10 de valor somado, deixando a nossa expressão dinâmica de acordo com os dados da base.
+
+## 15. Utilizando Case
+
+Agora vamos ver como podemos utilizar método `Case()` que tem a mesma função de um `Switch Case` que fazemos em programação, nesse exemplo vamos consultar o sexo do estudante e caso seja `M` vamos retornar `Masculino`, do contrário teremos o valor `default` que será o feminino.
+
+```py
+from basic import models
+from django.db.models import Value, Case, When
+
+models.Student.objects.annotate(
+    gender_name=Case(
+        When(gender='M', then=Value("Masculino")),
+        default=Value("Feminino")
+    )
+).values('name', 'gender_name')
+```
+No código acima temos temos dois novos imports o `Case` e o `When` que são necessário pra fazer nosso cenário de case, agora dentro do nosso annotate temos o `gender_name` que recebe o nosso `Case` e dentro do nosso case temos o `When` que recebe a possível opção de o `gender=M` se isso for verdadeiro então ele chama o `then` que retorna o valor `Masculino`, podemos ter vários `When` caso existam mais opções, em seguida temos o valor default caso nenhuma opção seja atendida, ele é chamado e retorna o valor `Feminino`.
