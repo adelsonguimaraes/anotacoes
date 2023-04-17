@@ -186,3 +186,53 @@ models.Student.objects.annotate(
 ).values('name', 'gender_name')
 ```
 No código acima temos temos dois novos imports o `Case` e o `When` que são necessário pra fazer nosso cenário de case, agora dentro do nosso annotate temos o `gender_name` que recebe o nosso `Case` e dentro do nosso case temos o `When` que recebe a possível opção de o `gender=M` se isso for verdadeiro então ele chama o `then` que retorna o valor `Masculino`, podemos ter vários `When` caso existam mais opções, em seguida temos o valor default caso nenhuma opção seja atendida, ele é chamado e retorna o valor `Feminino`.
+
+## 16. Consultas com Join
+
+Um recurso muito usado quando estamos trabalhando com bancos relacionais como o Postgres, é fazer consultas utilizando o `join`, isso nada mais é que poder consultar informações de uma outra classe que está relacionada com a nossa classe, vejamos um exemplo simples abaixo.
+
+```py
+from basic import models
+models.Student.objects.values('name', 'class_room__name')
+```
+No modelo acima temos uma consulta que busca pelo nome do estudante e pelo nome da class_room onde esté estudante estuda, lembrando como já estudamos anteriormente, estamos utilizando a ponte que liga nossa classe com classe estrangeira, nesse caso o nome da nossa ponte é `class_room` que é um atributo da nossa classe estudante que referencia a `class_room` como uma classe estrangeira, esse é o cenário onde o relacionamento é 1 para 1 e não temos uma tabela de relacionamento, dessa forma atravessamos a ponte para acessar o atributo desejado da outra classe `__name`, assim como as contantes, utilizamos dois underlines seguidos para acessar os atributos.
+
+A ponte interliga as classes, e quando acessamos outra classe também temos acesso a ponte delas caso exista, por exemplo, vamos imaginar que na nossa tabela `class_room` exista uma relação com outra classe chamada `discipline` e queremos saber qual o nome da disciplica que o estudante estuda, vejamos o exemplo abaixo.
+
+```py
+from basic import models
+models.Student.objects.values('name', 'class_room__name', 'class_room__discipline__name')
+```
+Nesse nosso exemplo tempo um campo nosso além dos que já estavam no exemplo anterior, `class_room__discipline__name`, podemos perceber aqui agora que primeiro usamos a ponte `class_room` para acessar a ponte de relacionamento de lá `_discipline`, nosso estudante não se relaciona com a disciplina, mas `class_room` tem relação, a partir do momento que atravessamos a ponte para lá, temos acesso a todos os atributos da classe, incluindo a ponte chamada `__discipline`, em seguida por essa ponte, acessamos o atríbuto `__name` que é a informação que queremos.
+
+Também podemos fazer consulta no sentido contrário da ponte, ou seja, acima vimos como pegar as class_rooms onde os estudantes estavam, e agora queremos pegar todos os estudantes que estão em uma determinada class_room, vejamos o código abaixo.
+
+```py
+from basic import models
+models.ClassRoom.objects.values('name', 'students__name')
+```
+No código acima estamos fazendo a consulta pelo nosso modelo `ClassRoom`, pegando o nome da turma e o nome de cada estudante que está relacionado com está turma, importante reparar no seguinte, utilizamos a ponte presente no modelo `Student` que chamamos de `related_name` onde amarramos um nome para o relacionamento entre `ClassRoom` e `Student` chamado `students`, uma boa prática para ser usada no related name é dar o mesmo nome da classe que está sendo aplicado adicionando um `s` no final do nome, vejamos abaixo pra ficar mais claro a classe Student.
+
+```py
+class Student(ModelBase):
+    name = models.CharField(max_length=100, null=False)
+    courses = models.ManyToManyField(
+        to="Course",
+        through="StudentCourse"
+    )
+    class_room = models.ForeignKey(
+        to="ClassRoom",
+        db_column="id_classroom",
+        on_delete=models.DO_NOTHING,
+        null=False,
+        related_name="employees"
+    )
+    
+
+    class Meta:
+        db_table = 'student'
+        managed = True
+```
+Acima temos o cenário de como seria o modelo da classe Student, podemos observar o relacionamento com `class_room`, e o atributo `related_name` com o valor `employees` que é nome da ponte que o acesso estrangeiro devo utilizar ou seja, quando queremos acessar os estudantes a partir de turma devemos usar `related_name` como a ponte para isso.
+
+## Renomeando campos com annotate
