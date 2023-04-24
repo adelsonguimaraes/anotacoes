@@ -334,9 +334,21 @@ Também podemos usar as funções acima com o annotate, utilizamos o aggregate e
 ```py
 from basic import models
 
-models.Subjects.objects.prefetch_related('student').annotate(
+models.Subjects.objects.prefetch_related('student').values('name').annotate(
     total=Sum('student__id')
 ).values('name', 'total')
 ```
-
 No exemplo acima conseguimos a resposta da consulta trazendo o nome de cada matéria e o total de estudantes.
+
+## Group by
+
+Vamos aproveitar o exemplo acima para explicar a utilização de `group_by` no django, que é uma função muito comum e muito utilizada em bancos de dados.
+
+```py
+from basic import models
+
+models.Subjects.objects.prefetch_related('student').values('name').annotate(
+    total=Sum('student__id')
+).values('name', 'total')
+```
+No exemplo acima antes do nosso anotate onde temos a função `Sum`, chamamos `.values`, a função desse values é fazer um agrupamento pelo campo `name`, se houvesse a necessidade de inserir um outro `group_by`, dentro desse values seria o local correto.
