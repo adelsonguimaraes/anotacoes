@@ -289,3 +289,44 @@ models.Student.ojects.annotate(
     _lower=Lower('name')
 ).values('name', '_upper', '_lower')
 ```
+
+## Utilizando Aggregate e agrupadores (Max, Min, Avg, Min, Sum, Count)
+
+Agora vamos ver um método do manager que serve para usarmos com agrupadores numéricos, esses agrupadores trazem sempre um valor final na sua consulta, `Max` traz o maior valor entre os listados, `Min` traz o menor, `Avg` traz a média, `Sum` a soma total, e o `Count` conta a quantidade total, vejamos os exemplos abaixo
+
+* Max - Pegando a maior idade
+```py
+from django.db.models import Max, Min, Avg, Count, Sum
+from basic import models
+
+models.Student.objects.aggregate(max=Max('age'))
+```
+
+* Min - Pegando a menor idade
+```py
+from basic import models
+
+models.Student.objects.aggregate(min=Min('age'))
+```
+
+* Avg - Pegando a idade média
+```py
+from basic import models
+
+models.Student.objects.aggregate(avg=Avg('age'))
+```
+
+* Sum - Soma total das idades
+```py
+from basic import models
+
+models.Student.objects.aggregate(sum=Sum('age'))
+```
+
+* Count - Pegando a quantidade total das idades
+```py
+from basic import models
+
+models.Student.objects.aggregate(count=Count('age'))
+```
+
