@@ -235,4 +235,14 @@ class Student(ModelBase):
 ```
 Acima temos o cenário de como seria o modelo da classe Student, podemos observar o relacionamento com `class_room`, e o atributo `related_name` com o valor `employees` que é nome da ponte que o acesso estrangeiro devo utilizar ou seja, quando queremos acessar os estudantes a partir de turma devemos usar `related_name` como a ponte para isso.
 
-## Renomeando campos com annotate
+## Utilizando Selected Related
+
+Quando fazemos uma consulta que envolve mais de uma consulta na mesma tabela, por exemplo, quando queremos pegar as matérias de um estudante, existem dois modelos(tabelas) envolvidos nessa consulta, o modelo de estudante e o modelo de matérias, nesse cenário o django pode fazer uma consulta na tabela de matéria, pra cada estudante que existir, isso é ruim, torna a consulta lenta, e pode ser resolvido com apenas uma query, ou seja, com apenas uma consulta, para que o rest framework possa atuar dessa maneira, podemos passar um método do `Manager` chamado `selected_ralated()`, dessa forma o Django irá evitar fazer consultas repetidas, vamos ver o exemplo abaixo.
+
+```py
+from basic import models
+
+models.Student.objects.selected_related('subjects').filter(subject__name__icontains="matemática").
+```
+No exemplo a cima estamos consultando via o modelo de estudantes todos os que tem a matéria matemática, podemos perceber que estamos chamando o método `.selected_related('subjects')`, informando qual o relacionamento que temos na consulta, para evitar a múltipla consulta sem necessidade.
+Outra coisa que é um benefício de usar o verbo, é a questão de `LazyLoad`, em cenários onde temos uma consulta que irá retornar outros objetos dentro, usar o `selected_related` é uma boa prática, assim se tem a garantia de que a resposta dos dados será como esperado.
