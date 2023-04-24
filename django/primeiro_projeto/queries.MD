@@ -242,7 +242,18 @@ Quando fazemos uma consulta que envolve mais de uma consulta na mesma tabela, po
 ```py
 from basic import models
 
-models.Student.objects.selected_related('subjects').filter(subject__name__icontains="matemática").
+models.Student.objects.selected_related('subject').filter(subject__name__icontains="matemática").
 ```
-No exemplo a cima estamos consultando via o modelo de estudantes todos os que tem a matéria matemática, podemos perceber que estamos chamando o método `.selected_related('subjects')`, informando qual o relacionamento que temos na consulta, para evitar a múltipla consulta sem necessidade.
+No exemplo a cima estamos consultando via o modelo de estudantes todos os que tem a matéria matemática, podemos perceber que estamos chamando o método `.selected_related('subject')`, informando qual o relacionamento que temos na consulta, para evitar a múltipla consulta sem necessidade.
 Outra coisa que é um benefício de usar o verbo, é a questão de `LazyLoad`, em cenários onde temos uma consulta que irá retornar outros objetos dentro, usar o `selected_related` é uma boa prática, assim se tem a garantia de que a resposta dos dados será como esperado.
+
+## Utilizando Prefetch Related
+
+Assim como vimos acima, o uso do `prefetch_related` tem a mesma funcionalidade, a diferença é que usamos em consultas onde o resultado será uma lista, por exemplo, acima fizemo um consulta para pegar a matéria de cada estudante, aqui vamos fazer uma consulta para pegar todos os alunos estão estudando em uma determinada matéria, nesse caso a consulta irá começar pelo lado da matéria, vejamos o exemplo abaixo.
+
+```py
+from basic import models
+
+models.Subject.objects.prefetch_related('student').filter(name__icontains="Português").values('name', 'student_name')
+```
+Acima no nosso exemplo a partir do modelo de matéria, estamos fazendo uma consulta onde informamos a relação com estudante `.prefetch_related('student')`, novamente evitando consultas não necessárias.
