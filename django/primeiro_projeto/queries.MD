@@ -257,3 +257,21 @@ from basic import models
 models.Subject.objects.prefetch_related('student').filter(name__icontains="Português").values('name', 'student_name')
 ```
 Acima no nosso exemplo a partir do modelo de matéria, estamos fazendo uma consulta onde informamos a relação com estudante `.prefetch_related('student')`, novamente evitando consultas não necessárias.
+
+## Utilizando Lpad
+
+Agora no nosso estudo vamos ver uma função do django utilizada para incrementar dados em uma String, chamada `LPad`, vejamos o exemplo abaixo.
+
+```py
+from basic import models
+from django.db.models import CharField
+from django.db.models.functions import Cast, F, Value, LPad
+
+models.Student.objects.annotate(
+    code=LPad(
+        Cast(F('id'), output_field=CharField()),
+        5, Value('0')
+    )
+)
+```
+No exemplo acima, fizemos uma consulta no modelo de estudantes, criamos uma anotação onde temos um campo chamado `code` que recebe nossa função `LPad`, essa função basicamente espera uma `expressão`, um `tamanho` e uma `string`, a expresão usamos o `Cast(F('id'), output_field=CharField())` que está pegando nosso id e convertendo para string, o tamanho é `5` e a string é `Value('0')`, traduzindo tudo isso estamos dizendo que nosso campo `code` será o id + 5 zeros a esquerda.
