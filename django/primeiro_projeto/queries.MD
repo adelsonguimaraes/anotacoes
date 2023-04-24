@@ -329,4 +329,14 @@ from basic import models
 
 models.Student.objects.aggregate(count=Count('age'))
 ```
+Também podemos usar as funções acima com o annotate, utilizamos o aggregate em casos que queremos apenas retornar o total e nenhum dado a mais, mas por exemplo se quisermos retornar a quantidade de alunos por uma matéria podemos usar o annotate pra isso.
 
+```py
+from basic import models
+
+models.Subjects.objects.prefetch_related('student').annotate(
+    total=Sum('student__id')
+).values('name', 'total')
+```
+
+No exemplo acima conseguimos a resposta da consulta trazendo o nome de cada matéria e o total de estudantes.
