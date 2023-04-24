@@ -275,3 +275,17 @@ models.Student.objects.annotate(
 )
 ```
 No exemplo acima, fizemos uma consulta no modelo de estudantes, criamos uma anotação onde temos um campo chamado `code` que recebe nossa função `LPad`, essa função basicamente espera uma `expressão`, um `tamanho` e uma `string`, a expresão usamos o `Cast(F('id'), output_field=CharField())` que está pegando nosso id e convertendo para string, o tamanho é `5` e a string é `Value('0')`, traduzindo tudo isso estamos dizendo que nosso campo `code` será o id + 5 zeros a esquerda.
+
+## Utilizando Upper e Lower
+
+Um exemplo das funções `Upper` e `Lower`.
+
+```py
+from basic import models
+from django.db.models.functions import Upper, Lower
+
+models.Student.ojects.annotate(
+    _upper=Upper('name'),
+    _lower=Lower('name')
+).values('name', '_upper', '_lower')
+```
