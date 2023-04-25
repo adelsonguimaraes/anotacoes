@@ -352,3 +352,23 @@ models.Subjects.objects.prefetch_related('student').values('name').annotate(
 ).values('name', 'total')
 ```
 No exemplo acima antes do nosso anotate onde temos a função `Sum`, chamamos `.values`, a função desse values é fazer um agrupamento pelo campo `name`, se houvesse a necessidade de inserir um outro `group_by`, dentro desse values seria o local correto, importante apontar que, para o group by funcionar, precisamos usar o `.values` antes de uma função de agrupamento como (Sum, Max, Min, Avg ou Count).
+
+## Trabalhando com Subqueries
+
+Agora vamos estudar sobre `subqueries`, quando trabalhamos com consultas sql em banco de dados, as sub consultas nos ajudam bastante para conseguir dados específicos, por exemplo, vamos consultar a informação de qual foi a última nota do estudante na metéria de matemática.
+
+```py
+from basic import models
+from django.db.models import Subquery, OuterRef
+
+sbq = models.Subject.objects.filter(
+    student=OuterRef('id')
+).order_by('-id').values('grade__value')[:1]
+
+models.Student.objects.annotate(
+    last_grade=Subquery(sbq)
+).values('id', 'name', 'last_grade')
+```
+Agora inportamos dois métodos novos vindos de `django.db.models` para trabalhar com as subqueries, o primeiro `Subquery` é utilizado dentro do anotate, e o segundo `OuterRef` é utilizado dentro do filter para sinalizar uma referência externa.
+Temos duas consultas separadas aqui, nossa primeira consulta é armazenada em uma variável chamada `sbq`, essa é nossa subquery, ou seja é a consulta interna que iremos fazer na tabela de matérias e notas para pegar o valor da última nota, aqui temos um filtro onde chamamos o `OuterRef` onde apontamos que o valor informado é externo, no caso um `id`.
+Nossa segunda consulta, é a query pincipal, aqui dentro do anotate usamos o `Subquery` onde informamos qual deve ser a subquery que queremos consultar, também chamamos um values, onde informamos os campos que precisamos dar display, no caso nosso id, name e a consulta que vem da subquery o last_grade.
