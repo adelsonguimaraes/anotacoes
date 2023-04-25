@@ -351,4 +351,4 @@ models.Subjects.objects.prefetch_related('student').values('name').annotate(
     total=Sum('student__id')
 ).values('name', 'total')
 ```
-No exemplo acima antes do nosso anotate onde temos a função `Sum`, chamamos `.values`, a função desse values é fazer um agrupamento pelo campo `name`, se houvesse a necessidade de inserir um outro `group_by`, dentro desse values seria o local correto.
+No exemplo acima antes do nosso anotate onde temos a função `Sum`, chamamos `.values`, a função desse values é fazer um agrupamento pelo campo `name`, se houvesse a necessidade de inserir um outro `group_by`, dentro desse values seria o local correto, importante apontar que, para o group by funcionar, precisamos usar o `.values` antes de uma função de agrupamento como (Sum, Max, Min, Avg ou Count).
