@@ -372,3 +372,17 @@ models.Student.objects.annotate(
 Agora inportamos dois métodos novos vindos de `django.db.models` para trabalhar com as subqueries, o primeiro `Subquery` é utilizado dentro do anotate, e o segundo `OuterRef` é utilizado dentro do filter para sinalizar uma referência externa.
 Temos duas consultas separadas aqui, nossa primeira consulta é armazenada em uma variável chamada `sbq`, essa é nossa subquery, ou seja é a consulta interna que iremos fazer na tabela de matérias e notas para pegar o valor da última nota, aqui temos um filtro onde chamamos o `OuterRef` onde apontamos que o valor informado é externo, no caso um `id`.
 Nossa segunda consulta, é a query pincipal, aqui dentro do anotate usamos o `Subquery` onde informamos qual deve ser a subquery que queremos consultar, também chamamos um values, onde informamos os campos que precisamos dar display, no caso nosso id, name e a consulta que vem da subquery o last_grade.
+
+## Trabalhando com IN
+
+Em alguns casos é mais performático fazer uma subconsulta que nos retornar uma lista de ids para fazermos nossa consulta utilizando o método `in` do manager, nada mais é do que uma consulta baseado em uma listagem.
+
+```py
+from basic import models
+from django.db.models import OuterRef
+
+sbq = models.Subjects.objects.filter(grade__value=10, name='Matemática').values_list('grade__student', flat=True)
+
+models.Student.objects.filter(id__in=sbq).values('name', 'subjects__grade__value')
+```
+Na nossa consulta acima, primeiramente fizemos nossa subquery filtrando apenas notas da matéria matemática onde a nota teve valor 10, utilizamos o método `values_list` pegando o campo estudande, e informando `flat=True`, o que faz com que apenas os valores sejam retornados sem as chaves, resumindo, nossa subquery irá retornar uma lista de ids de estudantes que tiveram nota 10 em matemática, em seguida vamos usar essa lista na nossa consulta principal, dentro do filter onde chamamos `id__in` e passamos a lista resultante da subquery, com isso a consulta principal irá listar os estudantes baseado na lista de id's.
