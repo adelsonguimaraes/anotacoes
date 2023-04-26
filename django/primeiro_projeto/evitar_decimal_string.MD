@@ -10,6 +10,6 @@ Para evitarmos a conversão de decimal para string, devemos apenas setar uma con
 ...
 
 REST_FRAMEWORK = {
-    'COERSE_DECIMAL_TO_STRING': False,
+    'COERCE_DECIMAL_TO_STRING': False,
 }
 ```
