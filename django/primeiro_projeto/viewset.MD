@@ -21,9 +21,6 @@ class CourseModelViewSet(viewsets.ModelViewSet):
 Acima criamos nossa classe de viewset de curso, assim como fizemos no serializer aqui seguimos a mesma convenção do nome da nossa classe ser o nome do modelo mais `ViewSet`, assim sabemos que esse é o viewset do nosso modelo, injetamos na nossa classe o `viewsets.ModelViewset` que é a super classe vinda do rest framework que diz que nosso viewset depende de modelo.
 Dentro do viewset temos dois atributos necessários para funcionar, o primeiro é o `queryset` que o django usa para armazenar a resposta da consulta no banco de dados e o `serializer_class` que é a classe serializadora do nosso modelo.
 Podemos perceber que o `queryset` recebe o seguinte `models.Course.objects.all()`, isso caracteriza uma consulta nos dados utilizando o modelo, que é a forma que fazemos consultas com o Django, no final podemos ver o `all()` que significa que estamos consultando todos os dados da tabela, existem outros tipos de consultas que iremos ver com o tempo.
-
-Aqui finalizamos o nosso estudo sobre as viewsets, nosso próximo passo é estudar sobre as `urls`, para seguir para o próximo estudo clique no link a seguir.
-
 ## 2. Criando métodos personalizados
 
 Dentro de um viewset podemos criar endpoints personalizados de acordo com a necessidade do sistema, por exemplo, vamos criar um método para retornar uma lista de cursos por nome.
@@ -72,5 +69,10 @@ Agora que a nossa queryset já foi atualizada, chamamos o método listar da supe
 ...
 return super(CourseModelViewSet, self).list(request, *args, **kwargs)
 ```
+Para acessar o nosso novo endpoint apenas adicionarmos ele no final da url
+
+> http://localhost:8000/api/school/basic/get_by_name
+
+Aqui finalizamos o nosso estudo sobre as viewsets, nosso próximo passo é estudar sobre as `urls`, para seguir para o próximo estudo clique no link a seguir.
 
 [Próximo passo](./urls.MD) - Trabalhando com urls.
