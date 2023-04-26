@@ -386,3 +386,7 @@ sbq = models.Subjects.objects.filter(grade__value=10, name='Matemática').values
 models.Student.objects.filter(id__in=sbq).values('name', 'subjects__grade__value')
 ```
 Na nossa consulta acima, primeiramente fizemos nossa subquery filtrando apenas notas da matéria matemática onde a nota teve valor 10, utilizamos o método `values_list` pegando o campo estudande, e informando `flat=True`, o que faz com que apenas os valores sejam retornados sem as chaves, resumindo, nossa subquery irá retornar uma lista de ids de estudantes que tiveram nota 10 em matemática, em seguida vamos usar essa lista na nossa consulta principal, dentro do filter onde chamamos `id__in` e passamos a lista resultante da subquery, com isso a consulta principal irá listar os estudantes baseado na lista de id's.
+
+Aqui finalizamos nosso estudo sobre queries do django, nosso próximo estudo é sobre paginação, clique no link abaixo para acessar o próximo estudo.
+
+[Próximo passo](./paginacao.MD) - Trabalhando com Paginação.
