@@ -44,3 +44,6 @@ Depois chamamos o método `is_valid` do serializador que retorna se os parâmetr
 ```py
 return super(CourseModelViewSet, self).list(request, *args, **kwargs) 
 ```
+Nosso estudo sobre serializer_params finalizou aqui, nosso próximo estudo é sobre Django Filter, para ir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./django_filter.MD) - Trabalhando com Django Filter.
