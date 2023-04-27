@@ -13,3 +13,7 @@ REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
 }
 ```
+
+Aqui finalizamos o nosso estudo, nosso próximo estudo é sobre `Managers`, para ir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./managers.MD) - Trabalhando com Managers.
