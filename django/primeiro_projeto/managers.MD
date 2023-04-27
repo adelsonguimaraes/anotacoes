@@ -36,3 +36,6 @@ from basic import models
 
 models.Student.objects.total_students_per_ager()
 ```
+Finalizamos aqui o nosso estudo sobre managers, nosso próximo estudo é sobre Serializer Params, para ir para o nosso próximo estudo clique no link a seguir.
+
+[Próximo passo](./serializer_params.MD) - Trabalhando com Serializer Params.
