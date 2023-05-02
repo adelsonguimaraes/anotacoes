@@ -97,6 +97,20 @@ class TeacherSerializer(FlexFieldsModelSerializer):
 Removemos o campo cursos que tinhamos criado anteriormente, importamos a lib que instalamos `FlexFieldModelSerializer`, injetamos na nossa classe serializadora e adicionamos a configuração `expandable_fields`, onde configuramos o serializador externo, o campo relacional e dizemos que existe múltiplos relacionamentos.
 Os campos flexíveis são interessantes porque ele só trará os campos expandidos que informarmos na consulta que queremos aquele campo expandido, vejamos a consulta abaixo.
 
-> http://localhost:8000/expanded=courses
+> http://localhost:8000/api/teacher/expand=courses
+
+No caso quando queremos expandir um objeto segue o modelo abaixo
+
+```py
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Course
+        fields = '__all__'
+
+    expandable_fields = {
+        'teacher': ('basic.TeacherSerializer',)
+    }
+```
+> http://localhost:8000/api/course/expanded=teacher
 
 [Próximo passo](./viewset.MD) - Trabalhando com viewsets.
