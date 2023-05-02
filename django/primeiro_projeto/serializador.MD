@@ -111,6 +111,6 @@ class CourseSerializer(serializers.ModelSerializer):
         'teacher': ('basic.TeacherSerializer',)
     }
 ```
-> http://localhost:8000/api/course/expanded=teacher
+> http://localhost:8000/api/course/expand=teacher
 
 [Próximo passo](./viewset.MD) - Trabalhando com viewsets.
