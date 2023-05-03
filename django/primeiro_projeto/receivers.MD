@@ -26,7 +26,7 @@ Para finalizar nossa configuração e deixar o nosso receiver pronto para ser us
 ```py
 ...
 def ready(self):
-    import receivers
+    import basic.receivers
     super(BasicConfig, self).ready()
 ```
 Pronto, com isso configuramos para que nossas receivers sejam chamadas, para testarmos e ver o resultado basta fazer uma chamada para o endpoint de curso com um método POST para criar um novo curso ou até mesmo um PATCH para editar um curso existente.
