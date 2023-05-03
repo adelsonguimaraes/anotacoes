@@ -11,12 +11,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from basic import models
 
-@receiver(post_save, sender=models.Course, dispatch_uid='create_file_course')
+@receiver(post_save, sender=models.Course, dispatch_uid='create_file_course', weak=False)
 def create_file_state():
     with open('course.txt', 'a') as files:
         file.write('f{instance.id}|{instance.name}')
 ```
-No código acima criamos nosso receiver, associamos ao modelo de curso, precisamos fazer alguns imports como podemos ver no topo do arquivo, o primeiro deles foi `post_save` que é um método pré-definido, representa o evento que ocorre quando salvamos em um modelo, também importamos o `receiver` que é uma anotação onde fazemos as configurações, o primeiro parámetro é referente ao método que será usado, neste caso o `post_save`, em seguida qual o sender, que representa o modelo nesse caso `models.Course`, e por último precisamos informar um `uid` para identificar esse receiver, aqui podemos apenas usr o mesmo nome do nosso método.
+No código acima criamos nosso receiver, associamos ao modelo de curso, precisamos fazer alguns imports como podemos ver no topo do arquivo, o primeiro deles foi `post_save` que é um método pré-definido, representa o evento que ocorre quando salvamos em um modelo, também importamos o `receiver` que é uma anotação onde fazemos as configurações, o primeiro parámetro é referente ao método que será usado, neste caso o `post_save`, em seguida qual o sender, que representa o modelo nesse caso `models.Course`, precisamos também informar um `uid` para identificar esse receiver, e por útlimo temos o parâmetro `weak=False` que é para evitar que o python mate o receiver antes de ser executado, aqui podemos apenas usr o mesmo nome do nosso método.
 Em seguida temos o método, que será executado quando o evento configurado acontecer, nesse caso sempre que o método salvar do modelo curso for chamado vamos executar esse método que irá criar ou editar um arquivo chamado `course.txt` e irá escrever o `id` e  `nome` que estão presentes na nossa instância.
 
 ## 2. Configurando o receiver no apps
