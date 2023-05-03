@@ -30,3 +30,18 @@ def ready(self):
     super(BasicConfig, self).ready()
 ```
 Pronto, com isso configuramos para que nossas receivers sejam chamadas, para testarmos e ver o resultado basta fazer uma chamada para o endpoint de curso com um método POST para criar um novo curso ou até mesmo um PATCH para editar um curso existente.
+
+## 3. Evento Pre-Save
+
+Como foi dito antes podemos utilizar vários métodos que são relativos a eventos para fazer nosso gatilho, no exemplo anterior utilizamos o post_save que é o evento que ocorre logo após salvar, nesse caso não poderiamos por exemplo salvar na mesma classe se fosse preciso adicionar dados, pois isso causaria uma recursividade, poderiamos salvar em outra modelo ou como fizemos em um arquivo, quando precisamos alterar alguma informação dentro do modelo antes de salvar devemos utilizar um evento que aconteça antes do save, para isso podemos utilizar o método `pre_save`, vamos ver abaixo um exemplo
+
+```py
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from basic import models
+
+@receiver(pre_save, sender=models.Course, dispatch_uid='update_course_name', weak=False)
+def update_course_name(instance, **kwargs):
+    instance.name = instance.name + '_teste'
+```
+No exemplo acima criamos um receiver para atualizar o nome do curso quando o método `save` for chamado, o gatilho acontecerá antes dos dados serem salvos, com isso nosso método que adiciona ao nome do curso `_teste` será executado antes de salvar, e quando salvar a alteração do nome já está presente.
