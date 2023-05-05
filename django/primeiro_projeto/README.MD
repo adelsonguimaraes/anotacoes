@@ -20,3 +20,8 @@ Abaixo segue o sumário do nosso estudo, bom estudo.
 13. [Queries](./queries.MD) - Trabalhando com queries.
 14. [Paginação](./paginations.MD) - Trabalhando com paginação.
 15. [Evitar Decimal String](./eveitar_decimal_string.MD) - Evitando conversão de decimal para string.
+16. [Managers](./managers.MD) - Trabalhando com managers personalizados.
+17. [Serializer Params](./serializer_params.MD) - Trabalhando com serializer params.
+18. [Django Filters](./django_filter.MD) - Trabalhando com Django Filter.
+19. [Receivers](./receivers.MD) - Trabalhando com receivers. 
+20. [Celery e Redis](./celery_redis) - Trabalahando com Celery e Redis.

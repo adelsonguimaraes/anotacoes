@@ -99,3 +99,7 @@ class CourseFilter(filterset.Filterset):
 Acima temos um exemplo onde temos um filtro personalizado que utiliza um método customizado onde fazemos a filtragem por nome do curso ou nome de professor, isso recebendo o valor que é enviado na url como valor do nosso filtro, a chamada ficaria assim.
 
 > localhost:8000/api/basic/course?name_or_teacher=matematica
+
+Aqui finalizamos o estudo sobre filters, nosso próximo estudo é sobre receivers, para ir para o próximo estudo clique no link a seguir.
+
+[Próximo passo](./receivers.MD) - Trabalhando com receivers.
