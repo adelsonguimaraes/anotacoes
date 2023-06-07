@@ -7,3 +7,4 @@ Git é a ferramenta de versionamento mais popular utilizada para controlar vers�
 1. [Aventuras](./../README.MD) - Voltar para o incício.
 2. [Configurando Autenticação](autenticacao.MD) - Configuranto e salvando credenciais git em cache.
 3. [Criando uma branch a partir de outra](criar_branch_a_partir_de_outra.MD) - Criando e Publicando uma branch nova a partir de outra branch.
+4. [Squash Manual](squash_manual.MD) - Como fazer o squash manualmente
